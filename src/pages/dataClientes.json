@@ -1,0 +1,72 @@
+[
+  {
+    "id": 2,
+    "nombre": "María",
+    "apellidoPaterno": "Gomez",
+    "apellidoMaterno": "Lopez",
+    "sexo": 2,
+    "fechaNacimiento": "25/05/1995",
+    "telefono": "987654321",
+    "direccion": "Calle 123",
+    "email": "mgomezlopez@gmail.com",
+    "estado": 1,
+    "fechaInicio": "10/07/2023",
+    "fechaFin": "10/09/2023"
+  },
+  {
+    "id": 3,
+    "nombre": "Luis",
+    "apellidoPaterno": "Rodriguez",
+    "apellidoMaterno": "Garcia",
+    "sexo": 1,
+    "fechaNacimiento": "03/12/1980",
+    "telefono": "555666777",
+    "direccion": "Paseo de la Reforma 456",
+    "email": "lrodriguezgarcia@gmail.com",
+    "estado": 3,
+    "fechaInicio": "01/06/2023",
+    "fechaFin": "01/08/2023"
+  },
+  {
+    "id": 4,
+    "nombre": "Ana",
+    "apellidoPaterno": "Martinez",
+    "apellidoMaterno": "Hernandez",
+    "sexo": 2,
+    "fechaNacimiento": "12/02/2000",
+    "telefono": "111222333",
+    "direccion": "Avenida Juarez 789",
+    "email": "amartinezhernandez@gmail.com",
+    "estado": 2,
+    "fechaInicio": "05/09/2023",
+    "fechaFin": "05/11/2023"
+  },
+  {
+    "id": 5,
+    "nombre": "Carlos",
+    "apellidoPaterno": "Gutierrez",
+    "apellidoMaterno": "Diaz",
+    "sexo": 1,
+    "fechaNacimiento": "19/07/1992",
+    "telefono": "777888999",
+    "direccion": "Calle Principal 101",
+    "email": "cgutierrezdiaz@gmail.com",
+    "estado": 1,
+    "fechaInicio": "22/08/2023",
+    "fechaFin": "22/10/2023"
+  },
+  {
+    "id": 6,
+    "nombre": "Sofia",
+    "apellidoPaterno": "Ramirez",
+    "apellidoMaterno": "Torres",
+    "sexo": 2,
+    "fechaNacimiento": "08/11/1985",
+    "telefono": "333444555",
+    "direccion": "Paseo de los Pinos 25",
+    "email": "sramireztorres@gmail.com",
+    "estado": 3,
+    "fechaInicio": "15/07/2023",
+    "fechaFin": "15/09/2023"
+  }
+]

@@ -1,0 +1,56 @@
+ <h2>Tabla de Elementos</h2>
+      <input
+        type="text"
+        placeholder="Filtrar por nombre"
+        value={filtroNombre}
+        onChange={(e) => setFiltroNombre(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Filtrar por estado"
+        value={filtroEstado}
+        onChange={(e) => setFiltroEstado(e.target.value)}
+      />
+      <input
+        type="date"
+        placeholder="Filtrar por fecha de inicio"
+        value={filtroFechaInicio}
+        onChange={(e) => setFiltroFechaInicio(e.target.value)}
+      />
+      <input
+        type="date"
+        placeholder="Filtrar por fecha de fin"
+        value={filtroFechaFin}
+        onChange={(e) => setFiltroFechaFin(e.target.value)}
+      />
+
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombres</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Fin</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {elementosFiltrados.map((elemento) => (
+            <tr key={elemento.id}>
+              <td>{elemento.id}</td>
+              <td>{elemento.nombre}</td>
+              <td>{elemento.telefono}</td>
+              <td>{elemento.estado}</td>
+              <td>{elemento.fechaInicio}</td>
+              <td>{elemento.fechaFin}</td>
+              <td>
+                {/* Agrega las opciones que desees aquí */}
+                <button>Editar</button>
+                <button>Eliminar</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
