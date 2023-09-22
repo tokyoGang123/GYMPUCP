@@ -1,0 +1,52 @@
+/* Modal.scss */
+
+.overlay {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .modal-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: auto;
+    border-radius: 12px;
+    padding: 0px;
+    position: relative;
+    .titulo-modal{
+      display: flex;
+      background-color: #6750A4;
+      color: white;
+      padding: 5px;
+      font-size: 1.5rem;
+      margin-top: 0%;
+      h3{
+        width: 95%;
+        text-align: center;
+      }
+      button{
+        background-color: #6750A4;
+        color: white;
+        border: none;
+        font-size: 1.5rem;
+        width: 5%;
+        margin-left: auto;
+        height: auto;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        border-radius: 100px;
+        &:hover {
+          background-color: #4D3A7C;
+        }
+      }
+    }
+  }
+}

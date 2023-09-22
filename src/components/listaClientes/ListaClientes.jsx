@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./ListaClientes.scss";
 import FormularioRegistroCliente from "../formulariosClientes/FormularioRegistroCliente";
 import FormularioEditarCliente from "../formulariosClientes/FormularioEditarCliente";
+import AnimatedOpenButton from "../modal/AnimatedOpenButton";
+import Modal from "../modal/Modal";
+import { Link } from "react-router-dom";
 const ListaClientes = ({ elementos }) => {
   // Estado para gestionar los filtros
   const [filtroFechaInicio, setFiltroFechaInicio] = useState("");
@@ -37,6 +40,16 @@ const ListaClientes = ({ elementos }) => {
     setElementosFiltrados(elementos);
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="contenido-clientes">
       <div className="titulo-cliente">
@@ -44,7 +57,7 @@ const ListaClientes = ({ elementos }) => {
       </div>
 
       <div className="boton-agregar-cliente">
-        <button> + Registrar Cliente</button>
+        <button onClick={openModal}> + Registrar Cliente</button>
       </div>
       {/*
     <div>
@@ -128,13 +141,32 @@ const ListaClientes = ({ elementos }) => {
               <td>{elemento.fechaFin}</td>
               <td>
                 {/* Agrega las opciones que desees aquí */}
-                <button className="boton-perfil">Perfil</button>
+                <button className="boton-perfil">
+                  <Link to={`perfil/${elemento.id}`}>Perfil</Link>
+                </button>
+
                 <button className="boton-clases">Clases</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div>
+        {/* Botón para abrir el modal */
+        /*
+        <AnimatedOpenButton handlClick={openModal}>
+          Abrir Modal
+        </AnimatedOpenButton>
+        */}
+        <Modal
+          handleClose={closeModal}
+          isOpen={isModalOpen}
+          titulo={"REGISTRAR CLIENTE"}
+        >
+          {/* Contenido del modal */}
+          <FormularioRegistroCliente />
+        </Modal>
+      </div>
     </div>
   );
 };

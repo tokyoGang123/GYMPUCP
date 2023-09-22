@@ -9,6 +9,7 @@ import Entrenadores from "./pages/Entrenadores";
 import Clientes from "./pages/Clientes";
 import Suscripcion from "./pages/Suscripcion";
 import Clases from "./pages/Clases";
+import PerfilCliente from "./components/perfilCliente/PerfilCliente";
 function App() {
   return (
     <Router>
@@ -21,6 +22,8 @@ function App() {
         <Route path="clientes" element={<Clientes />} />
         <Route path="suscripcion" element={<Suscripcion />} />
         <Route path="not-found" element={<NotFound />} />
+        <Route path="clientes/perfil/:id" element={<PerfilCliente />} />
+  
       </Routes>
     </Router>
   );

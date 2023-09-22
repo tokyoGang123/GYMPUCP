@@ -1,6 +1,6 @@
 [
   {
-    "id": 2,
+    "id": "2",
     "nombre": "María",
     "apellidoPaterno": "Gomez",
     "apellidoMaterno": "Lopez",
@@ -13,10 +13,11 @@
     "fechaInicio": "10/07/2023",
     "fechaFin": "10/09/2023",
     "talla": "1.58",
-    "peso": "60"
+    "peso": "60",
+    "DNI": 70709260
   },
   {
-    "id": 3,
+    "id": "3",
     "nombre": "Luis",
     "apellidoPaterno": "Rodriguez",
     "apellidoMaterno": "Garcia",
@@ -29,10 +30,11 @@
     "fechaInicio": "01/06/2023",
     "fechaFin": "01/08/2023",
     "talla": "1.58",
-    "peso": "60"
+    "peso": "60",
+    "DNI": 70709260
   },
   {
-    "id": 4,
+    "id": "4",
     "nombre": "Ana",
     "apellidoPaterno": "Martinez",
     "apellidoMaterno": "Hernandez",
@@ -45,10 +47,11 @@
     "fechaInicio": "05/09/2023",
     "fechaFin": "05/11/2023",
     "talla": "1.58",
-    "peso": "60"
+    "peso": "60",
+    "DNI": 70709260
   },
   {
-    "id": 5,
+    "id": "5",
     "nombre": "Carlos",
     "apellidoPaterno": "Gutierrez",
     "apellidoMaterno": "Diaz",
@@ -61,7 +64,8 @@
     "fechaInicio": "22/08/2023",
     "fechaFin": "22/10/2023",
     "talla": "1.58",
-    "peso": "60"
+    "peso": "60",
+    "DNI": 70709260
   },
   {
     "id": 6,
@@ -77,6 +81,7 @@
     "fechaInicio": "15/07/2023",
     "fechaFin": "15/09/2023",
     "talla": "1.58",
-    "peso": "60"
+    "peso": "60",
+    "DNI": 70709260
   }
 ]
