@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../../images/Logo.png";
 import { StyledLogo, StyledNavLink } from "../../styles/Navbar";
@@ -9,6 +9,9 @@ function Navbar() {
   const [dropdown, setDropdown] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+  const location = useLocation(); // Obtener la ubicación actual
+  const [activeRoute, setActiveRoute] = useState(""); // Estado para la ruta activa
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -25,6 +28,11 @@ function Navbar() {
     } else {
       setDropdown(false);
     }
+  };
+
+  // Función para manejar el cambio de ruta activa
+  const handleSetActiveRoute = (route) => {
+    setActiveRoute(route);
   };
   return (
     <>
@@ -64,8 +72,14 @@ function Navbar() {
           <li className="nav-item">
             <Link
               to="/clientes"
-              className="nav-links"
-              onClick={closeMobileMenu}
+              //className="nav-links"
+              className={`nav-links ${
+                location.pathname === "/clientes" ? "active" : ""
+              }`}
+              onClick={() => {
+                closeMobileMenu();
+                handleSetActiveRoute("/clientes");
+              }}
             >
               Clientes
             </Link>

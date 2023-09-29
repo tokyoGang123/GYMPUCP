@@ -72,6 +72,24 @@
 .menu-icon {
   display: none;
 }
+/*********************/
+/* Resto de tu CSS existente */
+
+/* Estilo para el elemento del menú activo */
+.nav-links.active {
+  color: #f7c325; /* Color del texto del elemento activo */
+  text-decoration: underline; /* Subrayado para el elemento activo */
+  /* Agrega cualquier otro estilo deseado aquí */
+}
+
+/* Opcional: Estilo para el elemento del menú activo al pasar el ratón sobre él */
+.nav-links.active:hover {
+  color: #f7c325; /* Color del texto del elemento activo al pasar el ratón */
+  text-decoration: underline; /* Subrayado para el elemento activo al pasar el ratón */
+  /* Agrega cualquier otro estilo deseado aquí */
+}
+/*********************/
+
 
 @media screen and (max-width: 960px) {
   .NavbarItems {
