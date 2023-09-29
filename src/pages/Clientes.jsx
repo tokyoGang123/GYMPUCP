@@ -21,7 +21,7 @@ export default function Clientes() {
   console.log("-------------------------------------------");
   return (
     <div className="clientes">
-      <ListaClientes elementos={elementos} />
+      <ListaClientes elementos={clientes} />
       {/* <ListaClientes elementos={clientes} /> */}
     </div>
   );

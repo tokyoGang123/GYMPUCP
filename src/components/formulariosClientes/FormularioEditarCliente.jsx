@@ -91,10 +91,10 @@ export default function FormularioEditarCliente({ cliente }) {
             <Field id="DNI" name="DNI" placeholder="DNI" />
             <label htmlFor="telefono">Teléfono: </label>
             <Field id="telefono" name="telefono" placeholder="Teléfono" />
-            <label htmlFor="talla">Talla (cm): </label>
-            <Field id="talla" name="talla" placeholder="-" />
             <label htmlFor="direccion">Dirección: </label>
             <Field id="direccion" name="direccion" placeholder="Dirección" />
+            <label htmlFor="talla">Talla (cm): </label>
+            <Field id="talla" name="talla" placeholder="-" />
 
             <label htmlFor="peso">Peso (Kg): </label>
             <Field id="peso" name="peso" placeholder="-" />

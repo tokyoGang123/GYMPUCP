@@ -80,7 +80,7 @@ const ListaClientes = ({ elementos }) => {
 
       <div className="boton-agregar-cliente">
         <button onClick={openModal}>
-          <AddIcon></AddIcon> Registrar Cliente
+           <b>+</b> Registrar Cliente
         </button>
       </div>
       {}
@@ -144,7 +144,7 @@ const ListaClientes = ({ elementos }) => {
         <tbody>
           {elementosFiltrados.map((elemento) => (
             <tr key={elemento.id}>
-              <td>{elemento.id}</td>
+              <td>{elemento.dni}</td>
               <td>
                 {elemento.nombre +
                   " " +
