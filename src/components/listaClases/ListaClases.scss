@@ -74,6 +74,13 @@
     font-weight: bold;
   }
 
+  .contenido {
+    display: flex; /* Alinea la columna de horas y clases en horizontal */
+    justify-content: space-between; /* Separa la columna de horas y clases */
+    width: 80%;
+    margin-top: 20px;
+  }
+
   .rectangulo-horas {
     display: flex;
     flex-direction: column;
@@ -84,6 +91,7 @@
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 10px;
+    margin-right: 10px;
   }
   
   .rectangulo-hora {
@@ -99,4 +107,101 @@
     font-weight: bold;
   }
 
+  .rectangulo-clases {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .rectangulo-clase {
+    width: 600px; /* Ancho del rectángulo de clases */
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .nombre-clase {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .inscritos,
+  .entrenador {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .rectangulo-duraciones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 600px;
+  }
+  
+  .rectangulo-duracion {
+    width: 200px; /* Ancho del rectángulo de duración */
+    height: 78px;
+    background-color: #ddc1be; /* Color de fondo */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 12px; /* Espacio entre las duraciones */
+    display: flex; /* Alinea horizontal y verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .rectangulo-asistencias {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 600px;
+  }
+  
+  .rectangulo-asistencia {
+    width: 200px; /* Ancho del rectángulo de duración */
+    height: 78px;
+    background-color: #549ac2; /* Color de fondo */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 12px; /* Espacio entre las duraciones */
+    display: flex; /* Alinea horizontal y verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .rectangulo-inscripciones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 600px;
+  }
+  
+  .rectangulo-inscripcion {
+    width: 200px; /* Ancho del rectángulo de duración */
+    height: 78px;
+    background-color: #bb647a; /* Color de fondo */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 12px; /* Espacio entre las duraciones */
+    display: flex; /* Alinea horizontal y verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+  }
+
 }
+

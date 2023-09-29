@@ -54,6 +54,54 @@ const ListaClases = ({ elementos }) => {
 
   const horas = ["8 AM", "9 AM", "10 AM", "11 AM", "12 PM"];
 
+  const clases = [
+    {
+      nombre: "Clase de Yoga",
+      inscritos: 15,
+      entrenador: "Juan Pérez",
+    },
+    {
+      nombre: "Clase de Pilates",
+      inscritos: 10,
+      entrenador: "María Rodríguez",
+    },
+    {
+      nombre: "Clase de Spinning",
+      inscritos: 20,
+      entrenador: "Saul Goodman",
+    },
+    {
+      nombre: "Clase de Cardio",
+      inscritos: 10,
+      entrenador: "Walter White",
+    },
+    {
+      nombre: "Clase de Pilates",
+      inscritos: 10,
+      entrenador: "María Rodríguez",
+    },
+    // Agrega más clases según sea necesario
+  ];
+
+  const duraciones = ["1 hora", "1 hora", "1 hora", "1 hora", "1 hora"];
+
+  const [asistencias, setAsistencias] = useState(
+    Array(5).fill("Asistencia") // Inicialmente, todas las asistencias dicen "Asistencia"
+  );
+
+  const [inscripciones, setInscripciones] = useState(
+    Array(5).fill("Inscribir") // Inicialmente, todas las asistencias dicen "Asistencia"
+  );
+
+  const handleAsistenciaClick = (index) => {
+    // Aquí puedes agregar cualquier lógica adicional que desees al hacer clic en asistencia
+    // En este caso, no cambiamos el estado de asistencia, pero puedes agregar lógica adicional aquí.
+  };
+
+  const handleInscripcionClick = (index) => {
+    // Cuando se hace clic en un rectángulo de inscripción, establece mostrarModal en true
+  };
+
   return (
     <div className="contenido-clases">
       <div className="titulo-clase">
@@ -62,10 +110,6 @@ const ListaClases = ({ elementos }) => {
 
       <div className="boton-agregar-clase">
         <button onClick={openAgregarClaseModal}> + Añadir clase</button>
-      </div>
-
-      <div className="boton-inscribir-cliente">
-        <button onClick={openBuscarClienteModal}> Inscribir</button>
       </div>
       {/*
     <div>
@@ -97,14 +141,49 @@ const ListaClases = ({ elementos }) => {
         </div>
       </div>  
 
-      <div className="rectangulo-horas">
-        {horas.map((hora) => (
-          <div key={hora} className="rectangulo-hora">
-            {hora}
-          </div>
-        ))}
-      </div>    
+      <div className="contenido">
+        <div className="rectangulo-horas">
+          {horas.map((hora) => (
+            <div key={hora} className="rectangulo-hora">
+              {hora}
+            </div>
+          ))}
+        </div>    
 
+        <div className="rectangulo-clases">
+          {clases.map((clase, index) => (
+            <div key={index} className="rectangulo-clase">
+              <div className="nombre-clase">{clase.nombre}</div>
+              <div className="inscritos">Inscritos: {clase.inscritos}</div>
+              <div className="entrenador">Entrenador: {clase.entrenador}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="rectangulo-duraciones">
+          {duraciones.map((duracion, index) => (
+            <div key={index} className="rectangulo-duracion">
+              {duracion}
+            </div>
+          ))}
+        </div>
+
+        <div className="rectangulo-asistencias">
+          {asistencias.map((asistencia, index) => (
+            <div key={index} className="rectangulo-asistencia" onClick={() => handleAsistenciaClick(index)}>
+              {asistencia}
+            </div>
+          ))}
+        </div>
+
+        <div className="rectangulo-inscripciones">
+          {inscripciones.map((inscripcion, index) => (
+            <div key={index} className="rectangulo-inscripcion" onClick={() => openBuscarClienteModal()}>
+              {inscripcion}
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div>
         {/* Botón para abrir el modal */
