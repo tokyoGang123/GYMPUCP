@@ -24,7 +24,7 @@ export default function PerfilCliente() {
       .catch((error) => {
         setError(error);
       });
-  }, []);
+  }, []); 
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -94,12 +94,12 @@ export default function PerfilCliente() {
 
       <div>
         <label>Talla:</label>
-        <input type="text" value={cliente.talla} readOnly />
+        <input type="text" value={cliente.talla + " cm"} readOnly />
       </div>
 
       <div>
         <label>Peso:</label>
-        <input type="text" value={cliente.peso} readOnly />
+        <input type="text" value={cliente.peso + " Kg"} readOnly />
         {console.log("pesoooooooo:", typeof cliente.peso)}
         {console.log("nombre:", cliente.nombre)}
       </div>

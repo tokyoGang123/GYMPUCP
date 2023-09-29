@@ -4,8 +4,8 @@ import FormularioRegistroCliente from "../formulariosClientes/FormularioRegistro
 import FormularioEditarCliente from "../formulariosClientes/FormularioEditarCliente";
 import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
-import SelectorRangoFechas from "../selectorFechas/SelectorRangoFechas";
 import { type } from "@testing-library/user-event/dist/type";
+import AddIcon from "@mui/icons-material/Add";
 const ListaClientes = ({ elementos }) => {
   // Estado para gestionar los filtros
   const [filtroFechaInicio, setFiltroFechaInicio] = useState("");
@@ -17,6 +17,9 @@ const ListaClientes = ({ elementos }) => {
   // Función para aplicar los filtros
   const aplicarFiltros = () => {
     const elementosFiltrados = elementos.filter((elemento) => {
+      // En caso als fechas sean del tipo null, se les pone como ""
+      elemento.fechaInicio = elemento.fechaInicio || "";
+      elemento.fechaFin = elemento.fechaFin || "";
       // Convierte la fecha de inicio y fecha de fin en objetos Date
       const fechaInicioStr = elemento.fechaInicio; // Supongamos que fechaInicioStr es "15/09/2023"
       const fechaFinStr = elemento.fechaFin; // Supongamos que fechaFinStr es "20/09/2023"
@@ -76,11 +79,16 @@ const ListaClientes = ({ elementos }) => {
       </div>
 
       <div className="boton-agregar-cliente">
-        <button onClick={openModal}> + Registrar Cliente</button>
+        <button onClick={openModal}>
+          <AddIcon></AddIcon> Registrar Cliente
+        </button>
       </div>
-      {
+      {}
+
+      <div className="lista-filtros">
         <div>
           <label>Filtrar por nombre: </label>
+
           <input
             type="text"
             placeholder=" Nombre"
@@ -88,9 +96,6 @@ const ListaClientes = ({ elementos }) => {
             onChange={(e) => setFiltroNombre(e.target.value)}
           />
         </div>
-      }
-
-      <div className="lista-filtros">
         <div>
           <label>Fecha de inicio: </label>
           <input
@@ -116,8 +121,8 @@ const ListaClientes = ({ elementos }) => {
             onChange={(e) => setFiltroEstado(e.target.value)}
           >
             <option value="">Todos</option>
-            <option value="1">Activo</option>
-            <option value="2">Inactivo</option>
+            <option value="1">Inactivo</option>
+            <option value="2">Activo</option>
           </select>
         </div>
 
@@ -150,8 +155,8 @@ const ListaClientes = ({ elementos }) => {
               <td>{elemento.telefono}</td>
               <td>
                 {/* Aplica la clase CSS condicionalmente */}
-                <span className={elemento.estado == 1 ? "activo" : "inactivo"}>
-                  {elemento.estado === 1 ? "Activo" : "Inactivo"}
+                <span className={elemento.estado == 1 ? "inactivo" : "activo"}>
+                  {elemento.estado === 1 ? "Inactivo" : "Activo"}
                 </span>
               </td>
               <td>{elemento.fechaInicio}</td>
@@ -178,7 +183,6 @@ const ListaClientes = ({ elementos }) => {
           <FormularioRegistroCliente />
         </Modal>
       </div>
-      <SelectorRangoFechas />
     </div>
   );
 };

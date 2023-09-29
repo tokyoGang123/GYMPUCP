@@ -1,6 +1,5 @@
 .contenido-clientes {
-  //background-color: rgb(246, 242, 238);
-  padding: 20px;
+  padding: 20px 70px;
   .titulo-cliente {
     display: flex;
     justify-content: space-between;
@@ -23,16 +22,85 @@
       color: #000000;
     }
   }
+  .boton-agregar-cliente {
+    
+    button {
+      text-align: center;
+      background-color: #7f67be;
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+      &:hover {
+        background-color: #634f9e;
+      }
+    }
+    margin-bottom: 25px;
+  }
+
+  /*
   .lista-filtros {
-    //background-color: aquamarine;
+    background-color: #C1B6CE;
     padding-left: 15%;
     padding-right: 15%;
     display: flex;
     justify-content: space-between;
   }
+  */
+  .lista-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 2%;
+    text-align: center;
+    //border: 1px solid black;
+    div {
+      display: flex;
+
+      align-items: center;
+      gap: 10px;
+      margin: 4px;
+
+      label {
+        font-weight: bold;
+        //  border: 1px solid black;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      select {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 12px;
+      }
+    }
+    button {
+      background-color: #eaddff;
+      color: black;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 20px;
+      margin-top: auto;
+      margin-bottom: auto;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #7f67be;
+        color: #ffffff;
+      }
+    }
+  }
+
   // TablaFiltrada.scss
 
   .tabla-filtrada {
+    background-color: #f0f0f0;
+
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
@@ -41,15 +109,16 @@
     td {
       padding: 8px 16px;
       text-align: left;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.12);
     }
 
     th {
-      background-color: #f5f5f5;
+      background-color: #c1b6ce;
+      text-align: center;
     }
 
     tbody tr:nth-child(even) {
-      background-color: #f2f2f2;
+      background-color: #ffffff;
     }
 
     tbody tr:hover {
@@ -66,11 +135,15 @@
     }
     button {
       border: none;
+      width: 60px;
       color: aliceblue;
       cursor: pointer;
       padding: 4px 8px;
-      margin-right: 4px;
+      //margin-right: 2px;
+      margin-left: 8%;
+      margin-right: 8%;
       border-radius: 50px;
+
       &:hover {
         background-color: #f5f5f5;
         color: #1e86b3;

@@ -29,7 +29,7 @@ export default function FormularioEditarCliente({ cliente }) {
           DNI: cliente.dni || "",
           talla: cliente.talla || "",
           peso: cliente.peso || "",
-          sexo: cliente.sexo || "",
+          sexo: cliente.sexo === 1 ? "Masculino" : "Femenino" || "",
         }}
         onSubmit={async (values, { setSubmitting }) => {
           // Formatear la fecha en el formato "dd/MM/yyyy"
@@ -51,6 +51,8 @@ export default function FormularioEditarCliente({ cliente }) {
             Direccion: values.direccion,
             Email: values.email,
             DNI: values.DNI,
+            Talla: values.talla,
+            Peso: values.peso,
           };
           try {
             // Realiza la solicitud HTTP PUT para actualizar el cliente
@@ -89,12 +91,12 @@ export default function FormularioEditarCliente({ cliente }) {
             <Field id="DNI" name="DNI" placeholder="DNI" />
             <label htmlFor="telefono">Teléfono: </label>
             <Field id="telefono" name="telefono" placeholder="Teléfono" />
-            <label htmlFor="talla">Talla: </label>
+            <label htmlFor="talla">Talla (cm): </label>
             <Field id="talla" name="talla" placeholder="-" />
             <label htmlFor="direccion">Dirección: </label>
             <Field id="direccion" name="direccion" placeholder="Dirección" />
-            
-            <label htmlFor="peso">Peso: </label>
+
+            <label htmlFor="peso">Peso (Kg): </label>
             <Field id="peso" name="peso" placeholder="-" />
 
             <label htmlFor="email">Email</label>

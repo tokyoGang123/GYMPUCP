@@ -16,10 +16,12 @@ export default function Clientes() {
         setError(error);
       });
   }, []);
+  console.log("-------------------------------------------");
   console.log("Estos son los datos leidos desde el JSON: ", clientes);
+  console.log("-------------------------------------------");
   return (
     <div className="clientes">
-      <ListaClientes elementos={clientes} />
+      <ListaClientes elementos={elementos} />
       {/* <ListaClientes elementos={clientes} /> */}
     </div>
   );
