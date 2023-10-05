@@ -5,11 +5,12 @@ import AnimatedOpenButton from "../modal/AnimatedOpenButton";
 import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
 import FormularioBusquedaCliente from "../formulariosClases/FormularioBusquedaCliente";
+import ClasesSemanales from "../formulariosClases/ClasesSemanales";
 
 const ListaClases = ({ elementos }) => {
-
   const [isAgregarClaseModalOpen, setIsAgregarClaseModalOpen] = useState(false);
-  const [isBuscarClienteModalOpen, setIsBuscarClienteModalOpen] = useState(false);
+  const [isBuscarClienteModalOpen, setIsBuscarClienteModalOpen] =
+    useState(false);
 
   const openAgregarClaseModal = () => {
     setIsAgregarClaseModalOpen(true);
@@ -27,13 +28,34 @@ const ListaClases = ({ elementos }) => {
     setIsBuscarClienteModalOpen(false);
   };
 
-  const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-  const hoursOfDay = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM'];
+  const daysOfWeek = [
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado",
+    "Domingo",
+  ];
+  const hoursOfDay = [
+    "8:00 AM",
+    "9:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "1:00 PM",
+    "2:00 PM",
+  ];
   const classes = [
-    { name: 'Smart Bike', instructor: 'John Doe', capacity: 10, duration: 60 },
-    { name: 'Zumba', instructor: 'Jane Smith', capacity: 15, duration: 60 },
-    { name: 'Abdominal', instructor: 'Alice Johnson', capacity: 8, duration: 30 },
-    { name: 'Jumbo', instructor: 'Bob Williams', capacity: 12, duration: 45 },
+    { name: "Smart Bike", instructor: "John Doe", capacity: 10, duration: 60 },
+    { name: "Zumba", instructor: "Jane Smith", capacity: 15, duration: 60 },
+    {
+      name: "Abdominal",
+      instructor: "Alice Johnson",
+      capacity: 8,
+      duration: 30,
+    },
+    { name: "Jumbo", instructor: "Bob Williams", capacity: 12, duration: 45 },
   ];
 
   const [diaSeleccionado, setDiaSeleccionado] = useState(null);
@@ -139,7 +161,7 @@ const ListaClases = ({ elementos }) => {
             </div>
           ))}
         </div>
-      </div>  
+      </div>
 
       <div className="contenido">
         <div className="rectangulo-horas">
@@ -148,7 +170,7 @@ const ListaClases = ({ elementos }) => {
               {hora}
             </div>
           ))}
-        </div>    
+        </div>
 
         <div className="rectangulo-clases">
           {clases.map((clase, index) => (
@@ -170,7 +192,11 @@ const ListaClases = ({ elementos }) => {
 
         <div className="rectangulo-asistencias">
           {asistencias.map((asistencia, index) => (
-            <div key={index} className="rectangulo-asistencia" onClick={() => handleAsistenciaClick(index)}>
+            <div
+              key={index}
+              className="rectangulo-asistencia"
+              onClick={() => handleAsistenciaClick(index)}
+            >
               {asistencia}
             </div>
           ))}
@@ -178,7 +204,11 @@ const ListaClases = ({ elementos }) => {
 
         <div className="rectangulo-inscripciones">
           {inscripciones.map((inscripcion, index) => (
-            <div key={index} className="rectangulo-inscripcion" onClick={() => openBuscarClienteModal()}>
+            <div
+              key={index}
+              className="rectangulo-inscripcion"
+              onClick={() => openBuscarClienteModal()}
+            >
               {inscripcion}
             </div>
           ))}
@@ -210,6 +240,8 @@ const ListaClases = ({ elementos }) => {
           <FormularioBusquedaCliente />
         </Modal>
       </div>
+      <h2>Horario</h2>
+      <ClasesSemanales></ClasesSemanales>
     </div>
   );
 };
