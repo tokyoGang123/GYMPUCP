@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import SesionHorario from "../listaClases/SesionHorario";
 
 function ClasesSemanales() {
   const [dataSesiones, setData] = useState([]);
@@ -38,9 +39,8 @@ function ClasesSemanales() {
       <h2>Resultados:</h2>
       <ul>
         {dataSesiones.map((item) => (
-          <li key={item.id}>
-            {item.horaInicio}: {item.horaFin} - {item.nombreEntrenador}
-          </li>
+          // Agregamos la propiedad "key" para que React pueda identificar cada elemento de la lista
+          <SesionHorario sesion={item} />
         ))}
       </ul>
     </div>
