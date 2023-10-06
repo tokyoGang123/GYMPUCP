@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "../navBar/Navbar";
 import dataClientes from "./clientes.json";
 import "./PerfilCliente.scss";
@@ -24,7 +24,7 @@ export default function PerfilCliente() {
       .catch((error) => {
         setError(error);
       });
-  }, []); 
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -58,6 +58,9 @@ export default function PerfilCliente() {
       <div className="boton-agregar-cliente">
         <button onClick={openModal}> + Editar Cliente</button>
       </div>
+      <Link to={`/clientes/perfil/${cliente.id}/historial-suscripciones`}>
+        Ver historial de suscripciones
+      </Link>
       <div>
         <label>Nombre completo:</label>
         <input

@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Field, FieldArray, Form, Formik } from "formik";
 import "./FormularioRegistroClases.scss";
 import { InputLabel } from "@mui/material";
-export default function FormularioRegistroClase() {
-  const [selectedOption, setSelectedOption] = useState("");
-  const handleSelectChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
 
-  const [formEnviado, setFormEnviado] = useState(false); //estado para mostrar el mensaje de formulario enviado exitosamente
+export default function FormularioRegistroClase() {
+  const [entrenadores, setEntrenadores] = useState([]);
+  const [formEnviado, setFormEnviado] = useState(false);
+
+  useEffect(() => {
+    // Obtener la lista de entrenadores desde tu API
+    axios
+      .get("https://localhost:7147/entrenadores/listar")
+      .then((response) => {
+        setEntrenadores(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener la lista de entrenadores:", error);
+      });
+  }, []);
 
   return (
     <div className="formulario-registro">
@@ -23,16 +32,14 @@ export default function FormularioRegistroClase() {
               fechaStr: "",
               horaInicio: "",
               horaFin: "",
-              entrenador: "",
+              entrenador: "", // Campo para seleccionar el entrenador de esta sesión
             },
           ],
         }}
         onSubmit={async (values, { resetForm }) => {
           await new Promise((r) => setTimeout(r, 500));
-          // Formatear la fecha en el formato "dd/MM/yyyy"
 
-          // Realizar la conversión de valores del formulario a formato de Cliente
-
+          // Realizar la conversión de valores del formulario a formato de Clase
           const clase = {
             nombre: values.nombre,
             descripcion: values.descripcion,
@@ -43,9 +50,9 @@ export default function FormularioRegistroClase() {
                 day: "2-digit",
                 month: "2-digit",
                 year: "numeric",
-              }), // Formato ISO
-              horaInicio: sesion.horaInicio, // Mantener el mismo formato 'hh:mm'
-              horaFin: sesion.horaFin, // Mantener el mismo formato 'hh:mm'
+              }),
+              horaInicio: sesion.horaInicio,
+              horaFin: sesion.horaFin,
               idEntrenador: sesion.entrenador,
             })),
           };
@@ -54,10 +61,8 @@ export default function FormularioRegistroClase() {
           axios
             .post("https://localhost:7147/clases/crear-clase", clase)
             .then((response) => {
-              // Manejar la respuesta aquí si es necesario
               console.log("Respuesta del servicio:", response.data);
-              // Mostrar un mensaje de éxito o realizar otras acciones después de la solicitud
-              alert("Clase creado exitosamente");
+              alert("Clase creada exitosamente");
               resetForm();
               setFormEnviado(true);
               setTimeout(() => {
@@ -65,13 +70,10 @@ export default function FormularioRegistroClase() {
               }, 1000);
             })
             .catch((error) => {
-              // Manejar los errores de la solicitud aquí si es necesario
               console.error("Error al crear la clase:", error);
               alert("Hubo un error al crear la clase");
             });
 
-          // Aquí puedes enviar el objeto "cliente" a tu API o realizar cualquier acción necesaria
-          // en lugar de mostrarlo con un alert
           alert(JSON.stringify(clase, null, 2));
           resetForm();
           setFormEnviado(true);
@@ -81,19 +83,13 @@ export default function FormularioRegistroClase() {
           }, 1000);
         }}
       >
-        {(
-          { values, setFieldValue } // Agregamos setFieldValue para actualizar "sexo"
-        ) => (
+        {({ values, setFieldValue }) => (
           <Form>
             <label htmlFor="nombre">Nombre: </label>
             <Field id="nombre" name="nombre" placeholder="Nombre" />
 
             <label htmlFor="descripcion">Descripcion: </label>
-            <Field
-              id="descripcion"
-              name="descripcion"
-              placeholder="Descripción"
-            />
+            <Field id="descripcion" name="descripcion" placeholder="Descripción" />
 
             <label htmlFor="aforo">Aforo: </label>
             <Field id="aforo" name="aforo" placeholder="Aforo" />
@@ -102,28 +98,31 @@ export default function FormularioRegistroClase() {
               {({ push, remove }) =>
                 values.sesiones.map((sesion, index) => (
                   <div key={index} className="sesion">
-                    <label htmlFor={`sesiones[${index}].fechaStr`}>
-                      Fecha:
-                    </label>
+                    <label htmlFor={`sesiones[${index}].fechaStr`}>Fecha:</label>
                     <Field name={`sesiones[${index}].fechaStr`} type="date" />
 
-                    <label htmlFor={`sesiones[${index}].horaInicio`}>
-                      Hora de inicio:
-                    </label>
+                    <label htmlFor={`sesiones[${index}].horaInicio`}>Hora de inicio:</label>
                     <Field name={`sesiones[${index}].horaInicio`} type="time" />
 
-                    <label htmlFor={`sesiones[${index}].horaFin`}>
-                      Hora de fin:
-                    </label>
+                    <label htmlFor={`sesiones[${index}].horaFin`}>Hora de fin:</label>
                     <Field name={`sesiones[${index}].horaFin`} type="time" />
 
-                    <label htmlFor={`sesiones[${index}].entrenador`}>
-                      Entrenador:
-                    </label>
-                    <Field
-                      name={`sesiones[${index}].entrenador`}
-                      placeholder="Entrenador"
-                    />
+                    <div>
+                      <label htmlFor={`sesiones[${index}].entrenador`}>Entrenador:</label>
+                      <select
+                        id={`sesiones[${index}].entrenador`}
+                        name={`sesiones[${index}].entrenador`}
+                        value={sesion.entrenador}
+                        onChange={(e) => setFieldValue(`sesiones[${index}].entrenador`, e.target.value)}
+                      >
+                        <option value="">Selecciona un entrenador</option>
+                        {entrenadores.map((entrenador) => (
+                          <option key={entrenador.id} value={entrenador.id}>
+                            {entrenador.nombre} {entrenador.apellidoPaterno} {entrenador.apellidoMaterno}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
                     {/* Botones de agregar y eliminar */}
                     {index === values.sesiones.length - 1 && (
@@ -142,16 +141,6 @@ export default function FormularioRegistroClase() {
               }
             </FieldArray>
 
-            {/*<div>
-              <InputLabel htmlFor="combo">Selecciona una opción: </InputLabel>
-              <select id="combo" value={selectedOption} onChange={handleSelectChange}>
-                <option value="">Selecciona una opción</option>
-                <option value="opcion1">Opción 1</option>
-                <option value="opcion2">Opción 2</option>
-                <option value="opcion3">Opción 3</option>
-              </select>
-              <p>Seleccionaste: {selectedOption}</p>
-        </div>*/}
             <button type="submit">Guardar</button>
             {formEnviado && (
               <p className="exito">Formulario enviado exitosamente</p>

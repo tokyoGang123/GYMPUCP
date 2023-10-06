@@ -10,6 +10,8 @@ import Clientes from "./pages/Clientes";
 import Suscripcion from "./pages/Suscripcion";
 import Clases from "./pages/Clases";
 import PerfilCliente from "./components/perfilCliente/PerfilCliente";
+import HistorialSuscripcionesCliente from "./components/historialSuscripcionesCliente/HistorialSuscripcionesCliente";
+import ListaSesionesCliente from "./components/listaSesionesCliente/ListaSesionesCliente";
 function App() {
   return (
     <Router>
@@ -23,7 +25,14 @@ function App() {
         <Route path="suscripcion" element={<Suscripcion />} />
         <Route path="not-found" element={<NotFound />} />
         <Route path="clientes/perfil/:id" element={<PerfilCliente />} />
-  
+        <Route
+          path="clientes/lista-sesiones-cliente/:id"
+          element={<ListaSesionesCliente />}
+        />
+        <Route
+          path="clientes/perfil/:id/historial-suscripciones"
+          element={<HistorialSuscripcionesCliente />}
+        />
       </Routes>
     </Router>
   );

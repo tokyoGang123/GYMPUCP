@@ -1,22 +1,69 @@
-import React, { useState } from "react";
-import "./ListaClientes.scss";
-import FormularioRegistroCliente from "../formulariosClientes/FormularioRegistroCliente";
-import FormularioEditarCliente from "../formulariosClientes/FormularioEditarCliente";
-import Modal from "../modal/Modal";
-import { Link } from "react-router-dom";
-import { type } from "@testing-library/user-event/dist/type";
-import AddIcon from "@mui/icons-material/Add";
-const ListaClientes = ({ elementos }) => {
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { obtenerTiposSuscripcion } from "../../data/DataTiposSuscripciones";
+import "./HistorialSuscripcionesCliente.scss";
+//Este componente mostrar el historial de suscripciones de un cliente en particular
+//del siguiente api : https://localhost:7147/clientes/historial-suscripciones/idCLiente
+
+export default function HistorialSuscripcionesCliente() {
+  const params = useParams();
+  const idCliente = params.id;
+  const [cliente, setCliente] = useState(null);
+  const [error, setError] = useState(null);
+  const [suscripcionesLeidas, setSuscripcionesLeidas] = useState([]); // Estado para almacenar los clientes leídos desde el JSON
+  const [tiposSuscripcion, setTiposSuscripcion] = useState([]);
   // Estado para gestionar los filtros
   const [filtroFechaInicio, setFiltroFechaInicio] = useState("");
   const [filtroFechaFin, setFiltroFechaFin] = useState("");
   const [filtroEstado, setFiltroEstado] = useState("");
   const [filtroNombre, setFiltroNombre] = useState("");
-  const [elementosFiltrados, setElementosFiltrados] = useState(elementos); // Estado para almacenar elementos filtrados
+  const [elementosFiltrados, setElementosFiltrados] =
+    useState(suscripcionesLeidas);
+  const urlGetSuscripcionesCliente = `https://localhost:7147/clientes/historial-suscripciones/${idCliente}`;
+  useEffect(() => {
+    axios
+      .get(urlGetSuscripcionesCliente)
+      .then((response) => {
+        setSuscripcionesLeidas(response.data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
 
+    // Llama a la función obtenerTiposSuscripcion
+    obtenerTiposSuscripcion()
+      .then((tiposSuscripcion) => {
+        setTiposSuscripcion(tiposSuscripcion);
+      })
+      .catch((error) => {
+        console.error("Error al obtener tipos de suscripción:", error);
+      });
+  }, []);
+  /********************** */
+  /*CLIENTES*/
+  const urlGetCliente = `https://localhost:7147/clientes/${idCliente}`;
+
+  useEffect(() => {
+    axios
+      .get(urlGetCliente) // Utiliza el nuevo URL para obtener un solo cliente
+      .then((response) => {
+        setCliente(response.data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, [idCliente]); // Añade idCliente como dependencia para actualizar cuando cambie
+
+  if (!cliente) {
+    return <div>No se encontró el cliente.</div>;
+  } else {
+    console.log("cliente único traído", cliente);
+    console.log("Tipos de suscripción:", tiposSuscripcion);
+  }
   // Función para aplicar los filtros
   const aplicarFiltros = () => {
-    const elementosFiltrados = elementos.filter((elemento) => {
+    const elementosFiltrados = suscripcionesLeidas.filter((elemento) => {
       // En caso als fechas sean del tipo null, se les pone como ""
       elemento.fechaInicio = elemento.fechaInicio || "";
       elemento.fechaFin = elemento.fechaFin || "";
@@ -59,31 +106,29 @@ const ListaClientes = ({ elementos }) => {
     setFiltroEstado("");
     setFiltroFechaInicio("");
     setFiltroFechaFin("");
-    setElementosFiltrados(elementos);
+    setElementosFiltrados(suscripcionesLeidas);
   };
+  console.log("Filtrados:", elementosFiltrados);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  /** Obtener precio de acuerdo a l tipo de suscripcion */
+  const obtenerPrecioPorTipoSuscripcion = (idTipoSuscripcion) => {
+    // Busca el tipo de suscripción por su ID
+    const tipoSuscripcion = tiposSuscripcion.find(
+      (tipo) => tipo.id === idTipoSuscripcion
+    );
 
-  const openModal = () => {
-    setIsModalOpen(true);
+    // Si se encuentra el tipo de suscripción, devuelve su precio, de lo contrario, devuelve un mensaje predeterminado
+    return tipoSuscripcion ? tipoSuscripcion.precio : "No encontrado";
   };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
-    <div className="contenido-clientes">
+    <div className="PerfilCliente">
       <div className="titulo-cliente">
-        <h2>Lista de Clientes</h2>
+        <h2>HISTORIAL DE SUSCRIPCIONES</h2>
+        <h3>
+          Cliente: {cliente.nombre} {cliente.apellidoPaterno}{" "}
+          {cliente.apellidoMaterno}
+        </h3>
       </div>
-
-      <div className="boton-agregar-cliente">
-        <button onClick={openModal}>
-          <b>+</b> Registrar Cliente
-        </button>
-      </div>
-      {}
 
       <div className="lista-filtros">
         <div>
@@ -122,7 +167,7 @@ const ListaClientes = ({ elementos }) => {
           >
             <option value="">Todos</option>
             <option value="1">Inactivo</option>
-            <option value="2">Activo</option>
+            <option value="0">Activo</option>
           </select>
         </div>
 
@@ -132,63 +177,32 @@ const ListaClientes = ({ elementos }) => {
       <table className="tabla-filtrada">
         <thead>
           <tr>
-            <th>Código</th>
-            <th>Nombres</th>
-            <th>Teléfono</th>
-            <th>Estado</th>
-            <th>Fecha de Inicio</th>
+            <th>Tipo</th>
+            <th>Fecha Inicio</th>
             <th>Fecha de Fin</th>
-            <th>Opciones</th>
+            <th>Estado</th>
+            <th>Precio</th>
           </tr>
         </thead>
         <tbody>
           {elementosFiltrados.map((elemento) => (
             <tr key={elemento.id}>
-              <td>{elemento.dni}</td>
-              <td>
-                {elemento.nombre +
-                  " " +
-                  elemento.apellidoPaterno +
-                  " " +
-                  elemento.apellidoMaterno}
-              </td>
-              <td>{elemento.telefono}</td>
+              <td>{elemento.idTipoSuscripcion}</td>
+              <td>{elemento.fechaInicio}</td>
+              <td>{elemento.fechaFin}</td>
               <td>
                 {/* Aplica la clase CSS condicionalmente */}
                 <span className={elemento.estado == 1 ? "inactivo" : "activo"}>
                   {elemento.estado === 1 ? "Inactivo" : "Activo"}
                 </span>
               </td>
-              <td>{elemento.fechaInicio}</td>
-              <td>{elemento.fechaFin}</td>
               <td>
-                {/* Agrega las opciones que desees aquí */}
-                <button className="boton-perfil">
-                  <Link to={`perfil/${elemento.id}`}>Perfil</Link>
-                </button>
-
-                <button className="boton-clases">
-                  <Link to={`lista-sesiones-cliente/${elemento.id}`}>
-                    Clases
-                  </Link>
-                </button>
+                {obtenerPrecioPorTipoSuscripcion(elemento.idTipoSuscripcion)}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div>
-        <Modal
-          handleClose={closeModal}
-          isOpen={isModalOpen}
-          titulo={"REGISTRAR CLIENTE"}
-        >
-          {/* Contenido del modal */}
-          <FormularioRegistroCliente />
-        </Modal>
-      </div>
     </div>
   );
-};
-
-export default ListaClientes;
+}

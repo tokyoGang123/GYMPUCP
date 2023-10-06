@@ -2,6 +2,7 @@
   padding: 20px 70px;
   .titulo-cliente {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
   }
   .boton-agregar-cliente {
@@ -41,17 +42,19 @@
   }
 
   /*
-  .lista-filtros {
-    background-color: #C1B6CE;
-    padding-left: 15%;
-    padding-right: 15%;
-    display: flex;
-    justify-content: space-between;
-  }
-  */
+    .lista-filtros {
+      background-color: #C1B6CE;
+      padding-left: 15%;
+      padding-right: 15%;
+      display: flex;
+      justify-content: space-between;
+    }
+    */
   .lista-filtros {
     display: flex;
     flex-wrap: wrap;
+    text-align: left;
+    justify-content: space-between;
     gap: 10px;
     margin-bottom: 2%;
     text-align: center;

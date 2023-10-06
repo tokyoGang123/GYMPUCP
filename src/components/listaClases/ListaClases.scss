@@ -6,6 +6,8 @@
     justify-content: center;
     align-items: center;
     height: 50px;
+    font-size: 24px;
+    margin-bottom: 10px;
   }
   .boton-agregar-clase {
     color: aliceblue;
@@ -18,11 +20,15 @@
       color: aliceblue;
       cursor: pointer;
       padding: 4px 8px;
+      margin-top: 10px;
       margin-right: 4px;
       border-radius: 50px;
-      text-align: left;
+      text-align: center;
       background-color: #eaddff;
       color: #000000;
+      width: 150px; /* Ancho del botón */
+      height: 50px; /* Alto del botón */
+      font-size: 14px;
     }
   }
 

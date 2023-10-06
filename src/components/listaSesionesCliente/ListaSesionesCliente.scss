@@ -1,4 +1,4 @@
-.PerfilCliente {
+.contenido-clientes {
   padding: 20px 70px;
   .titulo-cliente {
     display: flex;
@@ -41,14 +41,14 @@
   }
 
   /*
-  .lista-filtros {
-    background-color: #C1B6CE;
-    padding-left: 15%;
-    padding-right: 15%;
-    display: flex;
-    justify-content: space-between;
-  }
-  */
+    .lista-filtros {
+      background-color: #C1B6CE;
+      padding-left: 15%;
+      padding-right: 15%;
+      display: flex;
+      justify-content: space-between;
+    }
+    */
   .lista-filtros {
     display: flex;
     flex-wrap: wrap;

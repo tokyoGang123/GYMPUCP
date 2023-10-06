@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import SesionHorario from "../listaClases/SesionHorario";
+import "./ClasesSemanales.scss";
 
 function ClasesSemanales() {
   const [dataSesiones, setData] = useState([]);
@@ -25,16 +26,16 @@ function ClasesSemanales() {
   };
 
   return (
-    <div>
-      <h1>Clases Semanales</h1>
-      <div>
-        <button onClick={() => handleButtonClick(0)}>DOMINGO</button>
-        <button onClick={() => handleButtonClick(1)}>LUNES</button>
-        <button onClick={() => handleButtonClick(2)}>MARTES</button>
-        <button onClick={() => handleButtonClick(3)}>MIÉRCOLES</button>
-        <button onClick={() => handleButtonClick(4)}>JUEVES</button>
-        <button onClick={() => handleButtonClick(5)}>VIERNES</button>
-        <button onClick={() => handleButtonClick(6)}>SABADO</button>
+    <div className="clases-semanales">
+      {/*<h1>Clases Semanales</h1>*/}
+      <div className="dias">
+        <button type="submit" onClick={() => handleButtonClick(0)}>DOMINGO</button>
+        <button type="submit" onClick={() => handleButtonClick(1)}>LUNES</button>
+        <button type="submit" onClick={() => handleButtonClick(2)}>MARTES</button>
+        <button type="submit" onClick={() => handleButtonClick(3)}>MIÉRCOLES</button>
+        <button type="submit" onClick={() => handleButtonClick(4)}>JUEVES</button>
+        <button type="submit" onClick={() => handleButtonClick(5)}>VIERNES</button>
+        <button type="submit" onClick={() => handleButtonClick(6)}>SABADO</button>
       </div>
       <h2>Resultados:</h2>
       <ul>
@@ -48,3 +49,4 @@ function ClasesSemanales() {
 }
 
 export default ClasesSemanales;
+

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SesionHorario.scss";
+import Modal from "../modal/Modal";
+import FormularioBusquedaCliente from "../formulariosClases/FormularioBusquedaCliente";
 export default function SesionHorario({ sesion }) {
   /*
     sesion ejemplo:
@@ -16,28 +18,46 @@ export default function SesionHorario({ sesion }) {
     "idEntrenador": 1,
     "idClase": 27
   },
-
-
-
     */
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className="fila-sesion">
       <div className="cuadro-hora">
         <p>{sesion.horaInicio}</p>
       </div>
       <div className="datos-principales-sesion">
-        <h2>Nombre sesion - {sesion.id}</h2>
-        <p>{sesion.cantidadInscritos}</p>
-        <p>{sesion.aforo}</p>
-        <p>{sesion.nombreEntrenador}</p>
+        <h2>Nombre sesion - {sesion.nombreClase}</h2>
+        <p>Inscritos: {sesion.cantidadInscritos}</p>
+        <p>Aforo: {sesion.aforo}</p>
+        <p>Entrenador: {sesion.nombreEntrenador}</p>
       </div>
       <div className="cuadro-duracion">
         <p>{sesion.duracion}</p>
       </div>
-      <button className="boton-inscribir">Asistencia</button>
+      <button className="boton-asistencia">Asistencia</button>
 
-      <button className="boton-asistencia">Inscribir</button>
+      <button className="boton-inscribir" onClick={() => openModal(sesion.id)}>
+        Inscribir
+      </button>
 
+      <div>
+        <Modal
+          handleClose={closeModal}
+          isOpen={isModalOpen}
+          titulo={"REGISTRAR CLIENTE"}
+        >
+          {/* Contenido del modal */}
+          <FormularioBusquedaCliente sesionId={sesion.id} />
+        </Modal>
+      </div>
       {/*<p>{sesion.fechaStr}</p>
       <p>{sesion.horaInicio}</p>
       <p>{sesion.horaFin}</p> */}

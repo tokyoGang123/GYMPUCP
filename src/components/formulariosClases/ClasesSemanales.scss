@@ -1,0 +1,26 @@
+.clases-semanales {
+  .dias {
+    display: flex;
+    justify-content: space-between;
+    width: 1400px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 0 auto;
+    button[type="submit"] {
+      background-color: #EADDFF;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      width: 130px;
+      height: 40px;
+      &:hover {
+      background-color: #a07fd6;
+      }
+    }
+  }
+}
