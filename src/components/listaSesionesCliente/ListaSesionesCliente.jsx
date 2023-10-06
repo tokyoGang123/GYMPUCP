@@ -32,7 +32,7 @@ export default function ListaSesionesCliente() {
     axios
       .get(urlGetSesionesCliente)
       .then((response) => {
-        setSesionesLeidas(response.data);
+        setSesionesLeidas(response.data.slice().reverse());
         setLoading(false); // Marcar como cargado una vez que los datos estén disponibles
       })
       .catch((error) => {
@@ -58,23 +58,26 @@ export default function ListaSesionesCliente() {
   const aplicarFiltros = () => {
     const elementosFiltrados = sesionesLeidas.filter((elemento) => {
       // En caso als fechas sean del tipo null, se les pone como ""
-      elemento.fechaInicio = elemento.fechaInicio || "";
-      elemento.fechaFin = elemento.fechaFin || "";
+      console.log("Recibo: ", elemento.fechaSesion);
+
+      elemento.fechaSesion = elemento.fechaSesion || "";
+      //elemento.fechaFin = elemento.fechaFin || "";
       // Convierte la fecha de inicio y fecha de fin en objetos Date
-      const fechaInicioStr = elemento.fechaInicio; // Supongamos que fechaInicioStr es "15/09/2023"
-      const fechaFinStr = elemento.fechaFin; // Supongamos que fechaFinStr es "20/09/2023"
+      const fechaInicioStr = elemento.fechaSesion; // Supongamos que fechaInicioStr es "15/09/2023"
+      //const fechaFinStr = elemento.fechaFin; // Supongamos que fechaFinStr es "20/09/2023"
       // Separar la fecha en día, mes y año
       const fechaInicioParts = fechaInicioStr.split("/"); // [ "15", "09", "2023" ]
-      const fechaFinParts = fechaFinStr.split("/"); // [ "20", "09", "2023" ]
+      //const fechaFinParts = fechaFinStr.split("/"); // [ "20", "09", "2023" ]
       // Crear una nueva cadena en formato "YYYY-MM-DD"
       const fechaInicioFormatted = `${fechaInicioParts[2]}-${fechaInicioParts[1]}-${fechaInicioParts[0]}`;
-      const fechaFinFormatted = `${fechaFinParts[2]}-${fechaFinParts[1]}-${fechaFinParts[0]}`;
+      //const fechaFinFormatted = `${fechaFinParts[2]}-${fechaFinParts[1]}-${fechaFinParts[0]}`;
       const fechaInicio = new Date(fechaInicioFormatted);
-      const fechaFin = new Date(fechaFinFormatted);
-
+      //const fechaFin = new Date(fechaFinFormatted);
+      console.log("Final11: ", fechaInicio);
+      console.log("Final22: ", new Date(filtroFechaInicio));
       const fechasDentroDelRango =
-        filtroFechaInicio === "" || fechaInicio === new Date(filtroFechaInicio);
-      console.log("filtroooooooo fecha inicio: ", filtroFechaInicio);
+        filtroFechaInicio === " " ||
+        fechaInicio.getTime() == new Date(filtroFechaInicio).getTime();
 
       // Comprueba si el nombre, el estado y el tipo coinciden con los filtros
       const nombreCoincide =
