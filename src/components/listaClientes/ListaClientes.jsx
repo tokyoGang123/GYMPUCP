@@ -163,11 +163,11 @@ const ListaClientes = ({ elementos }) => {
               <td>{elemento.fechaFin}</td>
               <td>
                 {/* Agrega las opciones que desees aquí */}
-                <button className="boton-perfil">
+                <button className="lista-boton-perfil">
                   <Link to={`perfil/${elemento.id}`}>Perfil</Link>
                 </button>
 
-                <button className="boton-clases">
+                <button className="lista-boton-clases">
                   <Link to={`lista-sesiones-cliente/${elemento.id}`}>
                     Clases
                   </Link>

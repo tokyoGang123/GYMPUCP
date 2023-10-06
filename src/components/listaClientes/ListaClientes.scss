@@ -22,6 +22,7 @@
       color: #000000;
     }
   }
+
   .boton-agregar-cliente {
     button {
       text-align: center;
@@ -148,21 +149,34 @@
         color: #1e86b3;
       }
     }
-
-    .boton-perfil {
-      background-color: #6750a4;
-      a {
-        color: aliceblue;
-        text-decoration: none;
-        &:hover {
-          background-color: #f5f5f5;
-          color: #1e86b3;
-        }
-      }
+  }
+}
+.lista-boton-perfil {
+  background-color: #6750a4;
+  border: 2px solid #4caf50;
+  a {
+    color: aliceblue;
+    text-decoration: none;
+    &:hover {
+      background-color: #f5f5f5;
+      color: #6750a4;
     }
+  }
+  &:hover {
+    background-color: #f5f5f5;
+    color: #6750a4;
+    border: 1px solid #6750a4;
+  }
+}
+.lista-boton-clases {
+  background-color: #1e86b3;
 
-    .boton-clases {
-      background-color: #1e86b3;
+  a {
+    color: aliceblue;
+    text-decoration: none;
+    &:hover {
+      background-color: #f5f5f5;
+      color: #1e86b3;
     }
   }
 }

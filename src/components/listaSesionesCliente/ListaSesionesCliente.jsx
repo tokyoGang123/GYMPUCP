@@ -74,6 +74,7 @@ export default function ListaSesionesCliente() {
 
       const fechasDentroDelRango =
         filtroFechaInicio === "" || fechaInicio === new Date(filtroFechaInicio);
+      console.log("filtroooooooo fecha inicio: ", filtroFechaInicio);
 
       // Comprueba si el nombre, el estado y el tipo coinciden con los filtros
       const nombreCoincide =
