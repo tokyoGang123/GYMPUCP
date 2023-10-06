@@ -75,7 +75,7 @@ const ListaEntrenadores = ({ elementos }) => {
       <table className="tabla-filtrada">
         <thead>
           <tr>
-            <th>DNI</th>
+            <th>ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Email</th>
@@ -85,9 +85,9 @@ const ListaEntrenadores = ({ elementos }) => {
           </tr>
         </thead>
         <tbody>
-          {elementosFiltrados.map((elemento) => (
+          {elementos.map((elemento) => (
             <tr key={elemento.dni}>
-              <td>{elemento.dni}</td>
+              <td>{elemento.id}</td>
               <td>{elemento.nombre}</td>
               <td>{elemento.apellidoPaterno}</td>
               <td>{elemento.email}</td>

@@ -21,7 +21,7 @@ export default function Entrenadores() {
   console.log("-------------------------------------------");
   return (
     <div className="entrenadores">
-      <ListaEntrenadores elementos={elementos} />
+      <ListaEntrenadores elementos={entrenadores} />
       {/* <ListaClientes elementos={clientes} /> */}
     </div>
   );
