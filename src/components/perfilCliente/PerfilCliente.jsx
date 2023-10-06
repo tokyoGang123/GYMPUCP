@@ -49,18 +49,27 @@ export default function PerfilCliente() {
 
   // Renderizar el componente de perfil
   if (!cliente) {
-    return <div>No se encontró el cliente.</div>;
+    return <div>Cargando...</div>;
+    //return <div>No se encontró el cliente.</div>;
   }
   return (
     <div className="PerfilCliente">
       {console.log("cleinteeeeee: ", cliente)}
       <h2>Perfil del Cliente</h2>
-      <div className="boton-agregar-cliente">
-        <button onClick={openModal}> + Editar Cliente</button>
+      <div className="contenedor-botones">
+        <div className="boton-agregar-cliente">
+          <button onClick={openModal}> Editar Cliente</button>
+        </div>
+        <div className="boton-agregar-cliente">
+          <button onClick={openModal}>
+            {" "}
+            <Link to={`/clientes/perfil/${cliente.id}/historial-suscripciones`}>
+              Ver historial de suscripciones
+            </Link>
+          </button>
+        </div>
       </div>
-      <Link to={`/clientes/perfil/${cliente.id}/historial-suscripciones`}>
-        Ver historial de suscripciones
-      </Link>
+
       <div>
         <label>Nombre completo:</label>
         <input
@@ -96,13 +105,13 @@ export default function PerfilCliente() {
       </div>
 
       <div>
-        <label>Talla:</label>
-        <input type="text" value={cliente.talla + " cm"} readOnly />
+        <label>Talla (cm):</label>
+        <input type="text" value={cliente.talla} readOnly />
       </div>
 
       <div>
-        <label>Peso:</label>
-        <input type="text" value={cliente.peso + " Kg"} readOnly />
+        <label>Peso (Kg):</label>
+        <input type="text" value={cliente.peso} readOnly />
         {console.log("pesoooooooo:", typeof cliente.peso)}
         {console.log("nombre:", cliente.nombre)}
       </div>

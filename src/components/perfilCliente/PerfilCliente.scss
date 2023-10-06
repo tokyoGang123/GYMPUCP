@@ -1,41 +1,49 @@
 .PerfilCliente {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  
-    h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-  
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-  
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-  
-    button {
-      background-color: #EADDFF;
-      color: #000000;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #eaddff;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    a {
+      text-decoration: none;
+      color: #fff;
     }
   }
-  
-  .NoCliente {
-    text-align: center;
-    font-size: 18px;
-    margin-top: 20px;
-  }
-  
+}
+
+.NoCliente {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.contenedor-botones {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
