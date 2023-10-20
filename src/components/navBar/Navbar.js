@@ -6,7 +6,7 @@ import { StyledLogo, StyledNavLink } from "../../styles/Navbar";
 
 function Navbar() {
   const [click, setClick] = useState(false);
-  const [dropdown, setDropdown] = useState(false);
+  //const [dropdown, setDropdown] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
@@ -28,6 +28,11 @@ function Navbar() {
     } else {
       setDropdown(false);
     }
+  };
+  const [dropdown, setDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdown(!dropdown);
   };
 
   // Función para manejar el cambio de ruta activa
@@ -84,14 +89,36 @@ function Navbar() {
               Clientes
             </Link>
           </li>
-          <li className="nav-item">
-            <Link
-              to="/suscripcion"
-              className="nav-links"
-              onClick={closeMobileMenu}
-            >
+          <li
+            className="nav-item"
+            onMouseEnter={toggleDropdown}
+            onMouseLeave={toggleDropdown}
+          >
+            <Link to="/suscripcion" className="nav-links">
               Suscripción
             </Link>
+            {dropdown && (
+              <ul className="dropdown-menu">
+                <li className="dropdown-item">
+                  <Link
+                    to="suscripcion/lista-suscripciones"
+                    className="nav-links"
+                    onClick={closeMobileMenu}
+                  >
+                    Lista Suscripciones
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link
+                    to="suscripcion/descuentos"
+                    className="nav-links"
+                    onClick={closeMobileMenu}
+                  >
+                    Descuentos
+                  </Link>
+                </li>
+              </ul>
+            )}
           </li>
         </ul>
       </nav>

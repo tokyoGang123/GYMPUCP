@@ -12,6 +12,8 @@ import Clases from "./pages/Clases";
 import PerfilCliente from "./components/perfilCliente/PerfilCliente";
 import HistorialSuscripcionesCliente from "./components/historialSuscripcionesCliente/HistorialSuscripcionesCliente";
 import ListaSesionesCliente from "./components/listaSesionesCliente/ListaSesionesCliente";
+import Descuentos from "./pages/Descuentos";
+import ListaSuscripcionesPage from "./pages/ListaSuscripcionesPage";
 function App() {
   return (
     <Router>
@@ -23,6 +25,11 @@ function App() {
         <Route path="entrenadores" element={<Entrenadores />} />
         <Route path="clientes" element={<Clientes />} />
         <Route path="suscripcion" element={<Suscripcion />} />
+        <Route
+          path="suscripcion/lista-suscripciones"
+          element={<ListaSuscripcionesPage />}
+        />
+        <Route path="suscripcion/descuentos" element={<Descuentos />} />
         <Route path="not-found" element={<NotFound />} />
         <Route path="clientes/perfil/:id" element={<PerfilCliente />} />
         <Route

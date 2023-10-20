@@ -6,7 +6,7 @@ export const MenuItems = [
   },
   {
     title: "sign-out",
-    path: "/sign-out",
+    path: "/",
     cName: "dropdown-link",
   },
 ];

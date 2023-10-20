@@ -120,6 +120,15 @@ export default function HistorialSuscripcionesCliente() {
     // Si se encuentra el tipo de suscripción, devuelve su precio, de lo contrario, devuelve un mensaje predeterminado
     return tipoSuscripcion ? tipoSuscripcion.precio : "No encontrado";
   };
+  const obtenerNombrePorTipoSuscripcion = (idTipoSuscripcion) => {
+    // Busca el tipo de suscripción por su ID
+    const tipoSuscripcion = tiposSuscripcion.find(
+      (tipo) => tipo.id === idTipoSuscripcion
+    );
+
+    // Si se encuentra el tipo de suscripción, devuelve su precio, de lo contrario, devuelve un mensaje predeterminado
+    return tipoSuscripcion ? tipoSuscripcion.nombre : "No encontrado";
+  };
   return (
     <div className="PerfilCliente">
       <div className="titulo-cliente">
@@ -187,7 +196,10 @@ export default function HistorialSuscripcionesCliente() {
         <tbody>
           {elementosFiltrados.map((elemento) => (
             <tr key={elemento.id}>
-              <td>{elemento.idTipoSuscripcion}</td>
+              <td>
+                {" "}
+                {obtenerNombrePorTipoSuscripcion(elemento.idTipoSuscripcion)}
+              </td>
               <td>{elemento.fechaInicio}</td>
               <td>{elemento.fechaFin}</td>
               <td>
@@ -197,6 +209,7 @@ export default function HistorialSuscripcionesCliente() {
                 </span>
               </td>
               <td>
+                S/.{" "}
                 {obtenerPrecioPorTipoSuscripcion(elemento.idTipoSuscripcion)}
               </td>
             </tr>
