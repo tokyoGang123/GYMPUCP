@@ -188,14 +188,14 @@ export default function FormularioRegistroEntrenador() {
                 <label htmlFor="email" className="label2">
                   Email
                 </label>
-                <Field id="email" name="email" type="email" />
+                <Field id="email" name="email" className= "campo-email"/>
                 {errors.email && touched.email && (
                   <div className="error-message">{errors.email}</div>
                 )}
               </div>
 
               <div>
-                <label htmlFor="turno" className="label2">
+                <label htmlFor="turno" className="label3">
                   Turno
                 </label>
                 <select className="options">
@@ -216,7 +216,7 @@ export default function FormularioRegistroEntrenador() {
                   id="fechaNacimiento"
                   name="fechaNacimiento"
                   type="date"
-                  className="campo"
+                  
                 />
                 {errors.fechaNacimiento && touched.fechaNacimiento && (
                   <div className="error-message">{errors.fechaNacimiento}</div>
@@ -230,7 +230,7 @@ export default function FormularioRegistroEntrenador() {
                   id="fechaContratacion"
                   name="fechaContratacion"
                   type="date"
-                  className="campo"
+                  
                 />
                 {errors.fechaContratacion && touched.fechaContratacion && (
                   <div className="error-message">

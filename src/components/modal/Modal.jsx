@@ -12,11 +12,13 @@ const Modal = ({ handleClose, children, isOpen, titulo }) => {
     isOpen && (
       <div className="overlay">
         <div className="modal-container">
-          <div className="titulo-modal">
+          <div className="titulo-modal" style={{alignItems: 'center'}}>
             <h3>{titulo}</h3>
+            <div> 
             <button className="close-button" onClick={handleClose}>
               X
             </button>
+            </div>
           </div>
           {children}
         </div>
