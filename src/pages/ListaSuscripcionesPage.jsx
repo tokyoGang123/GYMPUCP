@@ -4,7 +4,7 @@ import elementos from "./dataClientes.json"; // Importa los datos desde el archi
 import ListaSuscripciones from "../components/listaSuscripciones/ListaSuscripciones";
 
 const urlGetListaSucripciones =
-  "https://localhost:7147/suscripciones/listar-suscripciones";
+  "https://localhost:7147/tipo-suscripcion/listar-todos";
 export default function ListaSuscripcionesPage() {
   const [listaSuscripciones, setListaSuscripciones] = useState([]);
   const [error, setError] = useState(null);

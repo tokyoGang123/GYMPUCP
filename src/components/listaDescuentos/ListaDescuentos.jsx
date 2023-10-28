@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
 import FormularioDescuento from "../formularioDescuento/FormularioDescuento";
+import FormularioEditarDescuento from "../formularioDescuento/FormularioEditarDescuento";
+import FormularioBorrarDescuento from "../formularioDescuento/FormularioBorrarDescuento";
 const ListaDescuentos = ({ elementos }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
+  const [modo, setModo] = useState("agregar"); // Modo por defecto: agregar
+  const [idDescuento, setIdDescuento] = useState(null); // ID por defecto: null
+  const openModal = (modo, idDescuento = null) => {
+    setModo(modo);
+    setIdDescuento(idDescuento); // Este ID puede ser el identificador del descuento a editar o borrar
     setIsModalOpen(true);
   };
 
@@ -19,7 +24,7 @@ const ListaDescuentos = ({ elementos }) => {
       </div>
 
       <div className="boton-agregar-cliente">
-        <button onClick={openModal}>
+        <button onClick={() => openModal("agregar")}>
           <b>+</b> Añadir descuento
         </button>
       </div>
@@ -40,15 +45,17 @@ const ListaDescuentos = ({ elementos }) => {
               <td>{parseInt(elemento.Porcentaje)} %</td>
               <td>
                 {/* Agrega las opciones que desees aquí */}
-                <button className="lista-boton-perfil">
-                  {/*<Link to={`perfil/${elemento.id}`}>Perfil</Link>*/}
+                <button
+                  onClick={() => openModal("editar", elemento.Id)}
+                  className="lista-boton-perfil"
+                >
                   Editar
                 </button>
 
-                <button className="lista-boton-clases">
-                  {/*<Link to={`lista-sesiones-cliente/${elemento.id}`}>
-                    Clases
-                  </Link> */}
+                <button
+                  onClick={() => openModal("borrar", elemento.Id)}
+                  className="lista-boton-clases"
+                >
                   Borrar
                 </button>
               </td>
@@ -60,11 +67,25 @@ const ListaDescuentos = ({ elementos }) => {
         <Modal
           handleClose={closeModal}
           isOpen={isModalOpen}
-          titulo={"CREAR DESCUENTO"}
-              >
-                  <FormularioDescuento />
-          {/* Contenido del modal */}
-          {/*<FormularioRegistroCliente />*/}
+          titulo={
+            modo === "agregar"
+              ? "CREAR DESCUENTO"
+              : modo === "editar"
+              ? "EDITAR DESCUENTO"
+              : "BORRAR DESCUENTO"
+          }
+        >
+          {modo === "agregar" ? (
+            <FormularioDescuento />
+          ) : modo === "editar" ? (
+            <FormularioEditarDescuento
+              descuento={elementos.find(
+                (descuento) => descuento.Id === idDescuento
+              )}
+            />
+          ) : (
+            <FormularioBorrarDescuento IdDescuento={idDescuento} />
+          )}
         </Modal>
       </div>
     </div>

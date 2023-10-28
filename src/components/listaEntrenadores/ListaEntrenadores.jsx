@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./ListaEntrenadores.scss";
-import {Link, useParams} from "react-router-dom"
+import { Link, useParams } from "react-router-dom";
 import FormularioRegistroEntrenadores from "../formulariosEntrenadores/FormularioRegistroEntrenador";
 import FormularioEditarEntrenador from "../formulariosEntrenadores/FormularioEditarEntrenador";
+import ListaAsistenciasEntrenador from "../asistenciaEntrenadores/listaAsistenciasEntrenador";
 import AnimatedOpenButton from "../modal/AnimatedOpenButton";
 import Modal1 from "../modal/Modal";
 import Modal2 from "../modal/Modal";
+import Modal3 from "../modal/ModalB";
 import axios from "axios";
 const urlGetEntrenadores = "https://localhost:7147/entrenadores/listar";
 const ListaEntrenadores = ({ elementos }) => {
@@ -14,8 +16,8 @@ const ListaEntrenadores = ({ elementos }) => {
   const idEntrenador = params.id;
   const [entrenador, setEntrenador] = useState(null);
   const [entrenadorAEditar, setEntrenador2] = useState(null);
-  const [entrenadoresLeidos, setEntrenadoresLeidos] = useState([]); 
-  const [error, setError]=useState(null);
+  const [entrenadoresLeidos, setEntrenadoresLeidos] = useState([]);
+  const [error, setError] = useState(null);
   const [filtroFechaInicio, setFiltroFechaInicio] = useState("");
   const [filtroFechaFin, setFiltroFechaFin] = useState("");
   const [filtroEstado, setFiltroEstado] = useState("");
@@ -47,8 +49,8 @@ const ListaEntrenadores = ({ elementos }) => {
       })
       .catch((error) => {
         setError(error);
-      })
-  })
+      });
+  });
 
   // Función para mostrar la lista completa
   const mostrarListaCompleta = () => {
@@ -61,13 +63,16 @@ const ListaEntrenadores = ({ elementos }) => {
 
   const [isModal1Open, setIsModal1Open] = useState(false);
   const [isModal2Open, setIsModal2Open] = useState(false);
-  
+  const [isModal3Open, setIsModal3Open] = useState(false);
 
   const openModal1 = () => {
     setIsModal1Open(true);
   };
   const openModal2 = () => {
     setIsModal2Open(true);
+  };
+  const openModal3 = () => {
+    setIsModal3Open(true);
   };
 
   const closeModal1 = () => {
@@ -78,12 +83,16 @@ const ListaEntrenadores = ({ elementos }) => {
     setIsModal2Open(false);
   };
 
+  const closeModal3 = () => {
+    setIsModal3Open(false);
+  };
+
   useEffect(() => {
     const entrenadorEncontrado = entrenadoresLeidos.find(
       (item) => item.id == idEntrenador
     );
 
-    if (entrenadorEncontrado){
+    if (entrenadorEncontrado) {
       setEntrenador(entrenadorEncontrado);
     }
   }, [idEntrenador, entrenadoresLeidos]);
@@ -109,11 +118,10 @@ const ListaEntrenadores = ({ elementos }) => {
       </div>
     */}
 
-      
       <table className="tabla-filtrada">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>DNI</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Email</th>
@@ -124,30 +132,49 @@ const ListaEntrenadores = ({ elementos }) => {
         </thead>
         <tbody>
           {elementos.map((elemento) => (
-            <tr key={elemento.dni}>
-              <td>{elemento.id}</td>
+            <tr key={elemento.id}>
+              <td>{elemento.dni}</td>
               <td>{elemento.nombre}</td>
               <td>{elemento.apellidoPaterno}</td>
               <td>{elemento.email}</td>
-              <td>{elemento.turno}</td>
+              <td>
+                {elemento.turno === 1
+                  ? "Mañana"
+                  : elemento.turno === 2
+                  ? "Tarde"
+                  : elemento.turno === 3
+                  ? "Noche"
+                  : ""}
+              </td>
+
               <td>
                 {/* Aplica la clase CSS condicionalmente */}
-                <span className={elemento.estado === 1 ? "activo" : "inactivo"}>
-                  {elemento.estado === 1 ? "Activo" : "Inactivo"}
+                <span className={elemento.estado === 1 ? "Inactivo" : "Activo"}>
+                  {elemento.estado === 1 ? "Inactivo" : "Activo"}
                 </span>
               </td>
 
               <td>
                 {/* Agrega las opciones que desees aquí */}
-                <button className="boton-editar" onClick={() => {
-                  setEntrenador2(elemento);
-                  openModal2();
-                  
-                }}>
+                <button
+                  className="boton-editar"
+                  onClick={() => {
+                    setEntrenador2(elemento);
+                    openModal2();
+                  }}
+                >
                   Editar
                 </button>
 
-                <button className="boton-turno">Turno</button>
+                <button
+                  className="boton-turno"
+                  onClick={() => {
+                    setEntrenador2(elemento);
+                    openModal3();
+                  }}
+                >
+                  Turno
+                </button>
               </td>
             </tr>
           ))}
@@ -175,8 +202,21 @@ const ListaEntrenadores = ({ elementos }) => {
           titulo={"EDITAR ENTRENADOR"}
         >
           {/* Contenido del modal */}
-          <FormularioEditarEntrenador entrenador={entrenadorAEditar}/>
+          <FormularioEditarEntrenador entrenador={entrenadorAEditar} />
         </Modal2>
+
+        <Modal3
+          handleClose={closeModal3}
+          isOpen={isModal3Open}
+          titulo={
+            entrenadorAEditar
+              ? `Asistencia de ${entrenadorAEditar.nombre} ${entrenadorAEditar.apellidoPaterno}`
+              : "Asistencia del Entrenador"
+          }
+        >
+          {/* Contenido del modal */}
+          <ListaAsistenciasEntrenador entrenador={entrenadorAEditar} />
+        </Modal3>
       </div>
     </div>
   );

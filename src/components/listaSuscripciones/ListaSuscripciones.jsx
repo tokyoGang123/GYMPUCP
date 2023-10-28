@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
+import FormularioTipoSuscripcion from "../formularioSuscripcion/FormularioTipoSuscripcion";
 const ListaSuscripciones = ({ elementos }) => {
   // Estado para gestionar los filtros
   const [filtroFechaInicio, setFiltroFechaInicio] = useState("");
@@ -13,11 +14,11 @@ const ListaSuscripciones = ({ elementos }) => {
   const aplicarFiltros = () => {
     const elementosFiltrados = elementos.filter((elemento) => {
       // En caso als fechas sean del tipo null, se les pone como ""
-      elemento.FechaInicio = elemento.FechaInicio || "";
-      elemento.FechaFin = elemento.FechaFin || "";
+      elemento.fechaInicio = elemento.fechaInicio || "";
+      elemento.fechaFin = elemento.fechaFin || "";
       // Convierte la fecha de inicio y fecha de fin en objetos Date
-      const fechaInicioStr = elemento.FechaInicio; // Supongamos que fechaInicioStr es "15/09/2023"
-      const fechaFinStr = elemento.FechaFin; // Supongamos que fechaFinStr es "20/09/2023"
+      const fechaInicioStr = elemento.fechaInicio; // Supongamos que fechaInicioStr es "15/09/2023"
+      const fechaFinStr = elemento.fechaFin; // Supongamos que fechaFinStr es "20/09/2023"
       // Separar la fecha en día, mes y año
       const fechaInicioParts = fechaInicioStr.split("/"); // [ "15", "09", "2023" ]
       const fechaFinParts = fechaFinStr.split("/"); // [ "20", "09", "2023" ]
@@ -36,11 +37,23 @@ const ListaSuscripciones = ({ elementos }) => {
       const nombreCoincide =
         filtroNombre === ""
           ? true
-          : elemento.Nombre.toLowerCase().includes(filtroNombre.toLowerCase());
+          : elemento.nombre.toLowerCase().includes(filtroNombre.toLowerCase());
 
       //const estadoCoincide = elemento.estado == filtroEstado;
       const estadoCoincide =
-        filtroEstado === "" ? true : elemento.Estado == filtroEstado;
+        filtroEstado === "" ? true : parseInt(filtroEstado) === elemento.estado;
+      console.log(
+        "#####Vemos el valor y tipo de elemento.estado: ",
+        elemento.estado,
+        " - ",
+        typeof elemento.estado
+      );
+      console.log(
+        "#####Vemos el valor y tipo de filtroEstado: ",
+        filtroEstado,
+        " - ",
+        typeof filtroEstado
+      );
 
       return estadoCoincide && nombreCoincide && fechasDentroDelRango;
     });
@@ -58,6 +71,7 @@ const ListaSuscripciones = ({ elementos }) => {
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -84,7 +98,12 @@ const ListaSuscripciones = ({ elementos }) => {
 
     return fechaTransformada;
   }
-
+  const borrarElemento = (elementoId) => {
+    const elementosActualizados = elementosFiltrados.filter(
+      (elemento) => elemento.id !== elementoId
+    );
+    setElementosFiltrados(elementosActualizados);
+  };
   return (
     <div className="contenido-clientes">
       <div className="titulo-cliente">
@@ -93,9 +112,10 @@ const ListaSuscripciones = ({ elementos }) => {
 
       <div className="boton-agregar-cliente">
         <button onClick={openModal}>
-          <b>+</b> Registrar Suscripción
+          <b>+</b> Registrar Tipo Suscripción
         </button>
       </div>
+
       {}
 
       <div className="lista-filtros">
@@ -131,7 +151,7 @@ const ListaSuscripciones = ({ elementos }) => {
           <label>Filtrar por estado: </label>
           <select
             value={filtroEstado}
-            onChange={(e) => setFiltroEstado(e.target.value)}
+            onChange={(e) => setFiltroEstado(parseInt(e.target.value))}
           >
             <option value="">Todos</option>
             <option value="1">Inactivo</option>
@@ -157,33 +177,44 @@ const ListaSuscripciones = ({ elementos }) => {
         <tbody>
           {elementosFiltrados.map((elemento) => (
             <tr key={elemento.nombre}>
-              <td>{elemento.Nombre}</td>
-              <td>{transformarFecha(elemento.FechaInicio)}</td>
-              <td>{transformarFecha(elemento.FechaFin)}</td>
-              <td>{elemento.CantidadSuscripciones}</td>
+              <td>{elemento.nombre}</td>
+              <td>{elemento.fechaInicio}</td>
+              <td>{elemento.fechaFin}</td>
+              <td>{elemento.cantidadSuscriptores}</td>
               <td>
                 {/* Aplica la clase CSS condicionalmente */}
                 <span className={elemento.estado == 1 ? "inactivo" : "activo"}>
                   {elemento.estado === 1 ? "Inactivo" : "Activo"}
                 </span>
               </td>
-              <td>{elemento.Precio}</td>
+              <td>S/. {elemento.precio}</td>
               <td>
                 {/* Agrega las opciones que desees aquí */}
                 <button className="lista-boton-perfil">
                   <Link to={`perfil/${elemento.id}`}>Editar</Link>
                 </button>
 
-                <button className="lista-boton-clases">
-                  <Link to={`lista-sesiones-cliente/${elemento.id}`}>
-                    Clases
-                  </Link>
+                <button
+                  className="lista-boton-borrar"
+                  onClick={() => borrarElemento(elemento.id)}
+                >
+                  Borrar
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div>
+        <Modal
+          handleClose={closeModal}
+          isOpen={isModalOpen}
+          titulo={"REGISTRAR TIPO DE SUSCRIPCION"}
+        >
+          {/* Contenido del modal */}
+          <FormularioTipoSuscripcion />
+        </Modal>
+      </div>
     </div>
   );
 };

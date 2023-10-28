@@ -1,13 +1,12 @@
 import { Field, Form, Formik } from "formik";
-import axios from "axios"
-import React, {useState} from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
-export default function FormularioEditarEntrenador({entrenador}) {
-
+export default function FormularioEditarEntrenador({ entrenador }) {
   const [success, setSuccess] = useState(false); // Estado para gestionar el éxito del envío
   console.log("first", entrenador);
   function convertirFecha(fecha) {
-    const partes = 1;
+    const partes = fecha.split("/");
     if (partes.length === 3) {
       const [dia, mes, anio] = partes;
       return `${anio}-${mes}-${dia}`;
@@ -17,7 +16,7 @@ export default function FormularioEditarEntrenador({entrenador}) {
   }
 
   const fechaNacimientoFormik = convertirFecha(entrenador.fechaNacimiento);
-  const fechaIncorporacionFormik = convertirFecha(entrenador.fechaIncorporacion);
+  const fechaIncorporacionFormik = convertirFecha(entrenador.fechaContratacion);
   return (
     <div className="formulario-registro">
       <Formik
@@ -28,7 +27,8 @@ export default function FormularioEditarEntrenador({entrenador}) {
           apellidoMaterno: entrenador.apellidoMaterno,
           fechaNacimiento: fechaNacimientoFormik || "",
           email: entrenador.email || "",
-          fechaIncorporacion: fechaIncorporacionFormik || "",
+          fechaContratacion: fechaIncorporacionFormik || "",
+          turno: entrenador.turno || "",
         }}
         onSubmit={async (values, { setSubmitting }) => {
           // Formatear la fecha en el formato "dd/MM/yyyy"
@@ -41,7 +41,7 @@ export default function FormularioEditarEntrenador({entrenador}) {
           });
 
           const fechaIncorporacion = new Date(
-            values.fechaIncorporacion
+            values.fechaContratacion
           ).toLocaleDateString("es-ES", {
             day: "2-digit",
             month: "2-digit",
@@ -53,9 +53,10 @@ export default function FormularioEditarEntrenador({entrenador}) {
             Nombre: values.nombre,
             ApellidoPaterno: values.apellidoPaterno,
             ApellidoMaterno: values.apellidoMaterno,
-            FechaNacimiento: values.fechaNacimiento,
-            FechaIncorporacion: values.fechaIncorporacion,
+            FechaNacimiento: fechaNacimiento,
+            FechaContratacion: fechaIncorporacion,
             Email: values.email,
+            Turno: values.turno,
           };
           try {
             // Realiza la solicitud HTTP PUT para actualizar el cliente
@@ -71,21 +72,29 @@ export default function FormularioEditarEntrenador({entrenador}) {
             setSubmitting(false);
           }
         }}
-
-        >
+      >
         {(
           { isSubmitting, values, setFieldValue } // Agregamos setFieldValue para actualizar "sexo"
         ) => (
           <Form>
+            <label htmlFor="dni" className="label1">
+              DNI:{" "}
+            </label>
+            <Field id="dni" name="dni" placeholder="DNI" className="campo" />
 
-            <label htmlFor="dni" className="label1">DNI: </label>
-            <Field id="dni" name="DNI" placeholder="DNI" className="campo" />
+            <label htmlFor="nombre" className="label1">
+              Nombre:{" "}
+            </label>
+            <Field
+              id="nombre"
+              name="nombre"
+              placeholder="Nombre"
+              className="campo"
+            />
 
-            <label htmlFor="nombre" className="label1" >Nombre: </label>
-            <Field id="nombre" name="nombre" placeholder="Nombre" 
-            className="campo"/>
-
-            <label htmlFor="primerApellido" className="label1">Primer Apellido: </label>
+            <label htmlFor="primerApellido" className="label1">
+              Primer Apellido:{" "}
+            </label>
             <Field
               id="primerApellido"
               name="apellidoPaterno"
@@ -93,7 +102,9 @@ export default function FormularioEditarEntrenador({entrenador}) {
               className="campo"
             />
 
-            <label htmlFor="segundoApellido" className="label1">Segundo Apellido: </label>
+            <label htmlFor="segundoApellido" className="label1">
+              Segundo Apellido:{" "}
+            </label>
             <Field
               id="segundoApellido"
               name="apellidoMaterno"
@@ -101,26 +112,24 @@ export default function FormularioEditarEntrenador({entrenador}) {
               className="campo"
             />
 
-
             <div className="columna">
               <div>
                 <label htmlFor="email" className="label2">
                   Email
                 </label>
-                <Field id="email" name="email" className= "campo-email"/>
-                
+                <Field id="email" name="email" className="campo-email" />
               </div>
 
               <div>
                 <label htmlFor="turno" className="label3">
                   Turno
                 </label>
-                <select className="options">
+                <Field as="select" className="options" id="turno" name="turno">
                   <option value=""></option>
-                  <option value="Mañana">Mañana</option>
-                  <option value="Tarde">Tarde</option>
-                  <option value="Noche">Noche</option>
-                </select>
+                  <option value="1">Mañana</option>
+                  <option value="2">Tarde</option>
+                  <option value="3">Noche</option>
+                </Field>
               </div>
             </div>
 
@@ -133,27 +142,24 @@ export default function FormularioEditarEntrenador({entrenador}) {
                   id="fechaNacimiento"
                   name="fechaNacimiento"
                   type="date"
-                  
                 />
-                
               </div>
               <div>
-                <label htmlFor="fechaContratacion" className="label2">
+                <label htmlFor="fechaIncorporacion" className="label2">
                   Fecha de incorporación:{" "}
                 </label>
                 <Field
-                  id="fechaContratacion"
-                  name="fechaIncorporacion"
+                  id="fechaIncorporacion"
+                  name="fechaContratacion"
                   type="date"
-                  
                 />
-               
               </div>
             </div>
 
-            <button type="submit" disabled={isSubmitting}>Guardar</button>
-            {success && <p>Cliente actualizado con éxito.</p>}
-
+            <button type="submit" disabled={isSubmitting}>
+              Guardar
+            </button>
+            {success && <p>Entrenador actualizado con éxito.</p>}
           </Form>
         )}
       </Formik>

@@ -15,6 +15,7 @@ export default function FormularioRegistroEntrenador() {
           fechaNacimiento: "",
           email: "",
           fechaContratacion: "",
+          turno: "",
         }}
         validate={(valoresIngresados) => {
           let errores = {};
@@ -100,12 +101,14 @@ export default function FormularioRegistroEntrenador() {
           });
           // Realizar la conversión de valores del formulario a formato de Cliente
           const entrenador = {
+            dni: values.dni,
             nombre: values.nombre,
             apellidoPaterno: values.apellidoPaterno,
             apellidoMaterno: values.apellidoMaterno,
             fechaNacimiento: fechaNacimiento,
             fechaContratacion: fechaContratacion,
             email: values.email,
+            turno: values.turno,
           };
 
           // Realizar la solicitud POST con Axios
@@ -188,7 +191,7 @@ export default function FormularioRegistroEntrenador() {
                 <label htmlFor="email" className="label2">
                   Email
                 </label>
-                <Field id="email" name="email" className= "campo-email"/>
+                <Field id="email" name="email" className="campo-email" />
                 {errors.email && touched.email && (
                   <div className="error-message">{errors.email}</div>
                 )}
@@ -198,12 +201,12 @@ export default function FormularioRegistroEntrenador() {
                 <label htmlFor="turno" className="label3">
                   Turno
                 </label>
-                <select className="options">
+                <Field as="select" className="options" id="turno" name="turno">
                   <option value=""></option>
-                  <option value="Mañana">Mañana</option>
-                  <option value="Tarde">Tarde</option>
-                  <option value="Noche">Noche</option>
-                </select>
+                  <option value="1">Mañana</option>
+                  <option value="2">Tarde</option>
+                  <option value="3">Noche</option>
+                </Field>
               </div>
             </div>
 
@@ -216,7 +219,6 @@ export default function FormularioRegistroEntrenador() {
                   id="fechaNacimiento"
                   name="fechaNacimiento"
                   type="date"
-                  
                 />
                 {errors.fechaNacimiento && touched.fechaNacimiento && (
                   <div className="error-message">{errors.fechaNacimiento}</div>
@@ -230,7 +232,6 @@ export default function FormularioRegistroEntrenador() {
                   id="fechaContratacion"
                   name="fechaContratacion"
                   type="date"
-                  
                 />
                 {errors.fechaContratacion && touched.fechaContratacion && (
                   <div className="error-message">
