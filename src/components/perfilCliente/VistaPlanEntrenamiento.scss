@@ -1,0 +1,24 @@
+// styles/VistaPlanEntrenamiento.scss
+
+// Contenedor principal
+.contenedor-vista-plan-entrenamiento {
+  display: flex;
+  flex-direction: column;
+  font-family: "Arial", sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  //border: 1px solid #f31818;
+  background-color: #f8f8f8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  .contenedor-vista-plan-entrenamiento-general {
+    display: flex;
+    //border: 2px solid blue;
+    .contenedor-vista-plan-entrenamiento-ejercicios {
+      //border: 1px solid #f31818;
+      width: 50%;
+    }
+  }
+}
+// Estilos adicionales según tus preferencias

@@ -14,6 +14,7 @@ import HistorialSuscripcionesCliente from "./components/historialSuscripcionesCl
 import ListaSesionesCliente from "./components/listaSesionesCliente/ListaSesionesCliente";
 import Descuentos from "./pages/Descuentos";
 import ListaSuscripcionesPage from "./pages/ListaSuscripcionesPage";
+import PlanEntrenamiento from "./pages/PlanEntrenamiento";
 function App() {
   return (
     <Router>
@@ -36,6 +37,7 @@ function App() {
           path="clientes/lista-sesiones-cliente/:id"
           element={<ListaSesionesCliente />}
         />
+        <Route path="plan_entrenamiento" element={<PlanEntrenamiento />} />
         <Route
           path="clientes/perfil/:id/historial-suscripciones"
           element={<HistorialSuscripcionesCliente />}

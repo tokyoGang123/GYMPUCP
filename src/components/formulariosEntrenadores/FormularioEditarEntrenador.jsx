@@ -1,3 +1,201 @@
+import React, { useState } from "react";
+import axios from "axios";
+
+const CrearEjercicio = () => {
+  const [nuevoEjercicio, setNuevoEjercicio] = useState({
+    Nombre: "",
+    IdTipoEjercicio: 0,
+    Series: 0,
+    Repeticiones: 0,
+    Descanso: 0,
+    Archivo: null,
+  });
+  const [mensaje, setMensaje] = useState("");
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNuevoEjercicio((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (event) => {
+    setNuevoEjercicio((prevState) => ({
+      ...prevState,
+      Archivo: event.target.files[0],
+    }));
+  };
+
+  const handleCreateEjercicio = () => {
+    const formData = new FormData();
+    formData.append("Nombre", nuevoEjercicio.Nombre);
+    formData.append("IdTipoEjercicio", nuevoEjercicio.IdTipoEjercicio);
+    formData.append("Series", nuevoEjercicio.Series);
+    formData.append("Repeticiones", nuevoEjercicio.Repeticiones);
+    formData.append("Descanso", nuevoEjercicio.Descanso);
+    formData.append("Archivo", nuevoEjercicio.Archivo);
+
+    axios
+      .post("https://localhost:7147/ejercicios/crear", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        setMensaje("Ejercicio creado correctamente");
+        setNuevoEjercicio({
+          Nombre: "",
+          IdTipoEjercicio: 0,
+          Series: 0,
+          Repeticiones: 0,
+          Descanso: 0,
+          Archivo: null,
+        });
+      })
+      .catch((error) => {
+        setMensaje("Error al crear el ejercicio");
+      });
+  };
+
+  return (
+    <div>
+      <h2>Crear Nuevo Ejercicio</h2>
+      <input
+        type="text"
+        placeholder="Nombre"
+        name="Nombre"
+        value={nuevoEjercicio.Nombre}
+        onChange={handleInputChange}
+      />
+      {/* Agrega más campos de entrada para otros atributos del ejercicio */}
+      <input type="file" name="Archivo" onChange={handleFileChange} />
+      <button onClick={handleCreateEjercicio}>Crear Ejercicio</button>
+      {mensaje && <p>{mensaje}</p>}
+    </div>
+  );
+};
+
+export default CrearEjercicio;
+
+{
+  /*import React, { useState } from "react";
+import axios from "axios";
+
+const CrearEjercicio = () => {
+  const [ejercicio, setEjercicio] = useState({
+    Nombre: "",
+    IdTipoEjercicio: 0,
+    Series: 0,
+    Repeticiones: 0,
+    Descanso: 0,
+    Archivo: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEjercicio({ ...ejercicio, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setEjercicio({ ...ejercicio, Archivo: e.target.files[0] });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("Nombre", ejercicio.Nombre);
+    formData.append("IdTipoEjercicio", ejercicio.IdTipoEjercicio);
+    formData.append("Series", ejercicio.Series);
+    formData.append("Repeticiones", ejercicio.Repeticiones);
+    formData.append("Descanso", ejercicio.Descanso);
+    formData.append("Archivo", ejercicio.Archivo);
+
+    try {
+      const response = await axios.post(
+        "https://localhost:7147/ejercicios/crear",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Ejercicio creado:", response.data);
+      // Manejo de la respuesta (redireccionar, mostrar mensajes, etc.)
+    } catch (error) {
+      console.error("Error al crear ejercicio:", error);
+      // Manejo de errores (mostrar mensajes, etc.)
+    }
+  };
+
+  return (
+    <div>
+      <h2>Crear Ejercicio</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Nombre:</label>
+          <input
+            type="text"
+            name="Nombre"
+            value={ejercicio.Nombre}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Tipo de Ejercicio:</label>
+          <input
+            type="number"
+            name="IdTipoEjercicio"
+            value={ejercicio.IdTipoEjercicio}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Series:</label>
+          <input
+            type="number"
+            name="Series"
+            value={ejercicio.Series}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Repeticiones:</label>
+          <input
+            type="number"
+            name="Repeticiones"
+            value={ejercicio.Repeticiones}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Descanso:</label>
+          <input
+            type="number"
+            name="Descanso"
+            value={ejercicio.Descanso}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Archivo (imagen):</label>
+          <input type="file" name="Archivo" onChange={handleFileChange} />
+        </div>
+        <div>
+          <button type="submit">Crear Ejercicio</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default CrearEjercicio;
+*/
+}
+
+{
+  /*}
 import { Field, Form, Formik } from "formik";
 import axios from "axios";
 import React, { useState } from "react";
@@ -165,4 +363,6 @@ export default function FormularioEditarEntrenador({ entrenador }) {
       </Formik>
     </div>
   );
+}
+*/
 }

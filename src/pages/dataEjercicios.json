@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "Nombre": "Deadlift",
+    "IdTipoEjercicio": 1,
+    "Series": 3,
+    "Repeticiones": 8,
+    "Descanso": 2,
+    "imagen": "https://static.vecteezy.com/system/resources/previews/006/417/762/large_2x/man-doing-barbell-deadlifts-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg"
+  },
+  {
+    "Id": 2,
+    "Nombre": "Single Leg Squad",
+    "IdTipoEjercicio": 1,
+    "Series": 3,
+    "Repeticiones": 8,
+    "Descanso": 2,
+    "imagen": "https://static.vecteezy.com/system/resources/previews/008/572/873/non_2x/man-doing-barbell-lunges-exercise-or-split-squat-flat-illustration-isolated-on-white-background-vector.jpg"
+  },
+  {
+    "Id": 3,
+    "Nombre": "Bent Over Row",
+    "IdTipoEjercicio": 2,
+    "Series": 3,
+    "Repeticiones": 8,
+    "Descanso": 2,
+    "imagen": "https://static.vecteezy.com/system/resources/previews/008/259/297/large_2x/man-doing-dumbbell-bent-over-rows-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg"
+  },
+  {
+    "Id": 4,
+    "Nombre": "Lateral Puldown",
+    "IdTipoEjercicio": 2,
+    "Series": 3,
+    "Repeticiones": 8,
+    "Descanso": 2,
+    "imagen": "https://static.vecteezy.com/system/resources/previews/008/056/919/non_2x/man-doing-seated-wide-grup-lat-pulldown-flat-illustration-isolated-on-white-background-free-vector.jpg"
+  },
+  {
+    "Id": 5,
+    "Nombre": "Bicep Curl",
+    "IdTipoEjercicio": 3,
+    "Series": 3,
+    "Repeticiones": 8,
+    "Descanso": 2,
+    "imagen": "https://static.vecteezy.com/system/resources/previews/008/572/895/large_2x/man-doing-standing-dumbbell-bicep-curls-flat-illustration-isolated-on-different-layers-workout-character-vector.jpg"
+  },
+  {
+    "Id": 6,
+    "Nombre": "Tricep Pushdown",
+    "IdTipoEjercicio": 4,
+    "Series": 4,
+    "Repeticiones": 8,
+    "Descanso": 2,
+    "imagen": "https://static.vecteezy.com/system/resources/previews/008/384/843/large_2x/man-doing-cable-rope-pushdown-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg"
+  }
+]
