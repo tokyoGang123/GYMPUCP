@@ -5,16 +5,22 @@ import "./listaAsistenciasEntrenador.scss";
 
 export default function ListaAsistenciasEntrenador({entrenador}) {
 
+  const [asistenciasRegistradas, setAsistenciasRegistradas] = useState([]);
   const [filtroFecha, setFiltroFecha] = useState(getFechaActual());
   const [asistencias, setAsistencias] = useState({});
   const [clickTime, setClickTime] = useState("");
+  const [tableTime, setTableTime] = useState("");
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
   const diasSemana = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
   const turnos = ['Mañana', 'Tarde', 'Noche'];
   const horarios = ['6:00 - 12:00', '12:00 - 18:00', '18:00 - 23:00'];
+  const [formEnviado, setFormEnviado] = useState(false);
+  const sonFechasIguales = (datetime, date) => {
+    return datetime.toISOString().split('T')[0] === date.toISOString().split('T')[0];
+  };
 
   const [success, setSuccess] = useState(false); // Estado para gestionar el éxito del envío
-  console.log("first", entrenador);
+  //console.log("first", entrenador);
   function convertirFecha(fecha) {
     const partes = fecha.split("/");
     if (partes.length === 3) {
@@ -41,10 +47,62 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
       const today = new Date();
       setCurrentTime(today.toLocaleTimeString());
     }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    clearInterval(interval)
+    
+    const fetchAsistencias = async () => {
+      try {
+        const response = await axios.get(
+          `https://localhost:7147/entrenadores/listar-asistencias?idEntrenador=${entrenador.id}`
+        );
+        console.log("Lista...", response);
+        const asistenciasObtenidas = response.data;
+        // Create a copy of the current state
+        const asistenciasActualizadas = { ...asistencias };
+        
+        // Iterate over the obtained asistencias and update the state
+        asistenciasObtenidas.forEach(asistencia => {
+          let fechaAsistencia = new Date(asistencia.fechaAsistencia);
+          let dia = fechaAsistencia.getDate();
+          let mes = fechaAsistencia.getMonth();
 
+          // Intercambia el día y el mes
+          fechaAsistencia.setDate(mes + 1);  // Agregamos 1 al mes porque los meses en JavaScript van de 0 a 11
+          fechaAsistencia.setMonth(dia - 1); // Restamos 1 al día para evitar conflictos de índices
+          let hora = fechaAsistencia.getHours();
+          let minutos = fechaAsistencia.getMinutes();
+          let horaLLegadaString = `${hora}:${minutos}`;
+          fechaAsistencia.setHours(19, 0, 0, 0);
+          console.log("fechaDespues", fechaAsistencia);
+          const diaSemanaAsistencia = diasSemana[fechaAsistencia.getDay() - 1]; // -1 porque los días de la semana empiezan en 0
+          console.log("asistencia.turno:", asistencia.turno)
+          const turnoAsistencia = asistencia.turno - 1;
+          const key = `${fechaAsistencia.toString()}`;
+          const key2 = `${turnos[turnoAsistencia]}`
 
+        // Verificar que la asistencia sea válida antes de actualizar el estado
+
+          if (!asistenciasActualizadas[key]){
+            asistenciasActualizadas[key] = {};
+          }
+          if (!asistenciasActualizadas[key][key2]) {
+            asistenciasActualizadas[key][key2] = asistencia['asistio'] ? true : false;
+            asistenciasActualizadas[key]["llegada"] = horaLLegadaString;
+          }
+
+        });
+        //asistenciasActualizadas["Thu Nov 09 2023 19:00:00 GMT-0500 (hora estándar de Perú)"] = {};
+        //asistenciasActualizadas["Thu Nov 09 2023 19:00:00 GMT-0500 (hora estándar de Perú)"]["Mañana"] = true;
+        // Update the state with the new information
+        console.log("Cambio por effect", asistenciasActualizadas);
+        setAsistencias(asistenciasActualizadas);
+      } catch (error) {
+        console.error('Error al obtener las asistencias:', error);
+      }
+    };
+  
+    fetchAsistencias();
+  }, [entrenador.id]);
+  
 
   function getFechaActual() {
     const today = new Date();
@@ -95,13 +153,29 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
     return formattedTime;
   };
 
+  const registrarAsistencia = async (entrenadorId, fecha, turno, n) => {
+    try {
+      const response = await axios.put(
+        `https://localhost:7147/entrenadores/registrar-asistencia?id=${entrenadorId}&turno=${n}`,
+        
+      );
+      console.log("Asistencia registrada con éxito:", response.data);
+    } catch (error) {
+      console.error("Error al registrar asistencia:", error);
+    }
+  };
+
   const weekDays = generateWeek(new Date(filtroFecha));
-  const handleAttendance = (day, turno) => {
+  const handleAttendance = (day, turno, n) => {
+    new Date(filtroFecha).setHours(19, 0, 0, 0);
+    console.log("LLegue...");
     const updatedAsistencias = { ...asistencias };
     if (!updatedAsistencias[day]) {
       updatedAsistencias[day] = {};
+      console.log("Cambio 1...")
     }
     updatedAsistencias[day][turno] = !updatedAsistencias[day][turno];
+    console.log("Cambio por click", updatedAsistencias);
     setAsistencias(updatedAsistencias);
     if (!clickTime) {
       const now = new Date();
@@ -110,6 +184,9 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
       const formattedTime = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
       setClickTime(formattedTime); 
     }
+    console.log("Entrenador: ", entrenador.id);
+    console.log("n: ", n);
+    registrarAsistencia(entrenador.id, day, turno, n);
   };
 
   const fechaNacimientoFormik = convertirFecha(entrenador.fechaNacimiento);
@@ -155,19 +232,7 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
             Email: values.email,
             Turno: values.turno,
           };
-          try {
-            // Realiza la solicitud HTTP PUT para actualizar el cliente
-            await axios.put(
-              `https://localhost:7147/entrenadores/editar/${entrenador.id}`,
-              entrenadorFormateado
-            );
-            setSuccess(true); // Establece el éxito del envío como verdadero
-          } catch (error) {
-            console.error("Error al actualizar el entrenador:", error);
-            console.log("Datos dados:", entrenadorFormateado);
-          } finally {
-            setSubmitting(false);
-          }
+          
         }}
 
         >
@@ -186,6 +251,10 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
                   type="date"
                   onChange={(e) => setFiltroFecha(e.target.value)}
                 />   
+                <button type="submit">Guardar</button>
+              {formEnviado && (
+              <p className="exito">Asistencias guardadas exitosamente</p>
+              )}
             </div>
             <div className="dias">
               <div className="vacio"></div>
@@ -205,17 +274,17 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
             <table className="tabla-asistencias">
               
               <tbody>
-                {turnos.map((turno, index) => (
-                  <tr key={index}>
+                {turnos.map((turno, index1) => (
+                  <tr key={index1}>
                     <div className="fila1">
                       <div className="labelTurno">{turno}</div>
-                      <div className="labelHorario">{horarios[index]}</div>
+                      <div className="labelHorario">{horarios[index1]}</div>
                     </div>
                     {weekDays.map((day, index) => (
                       <td key={index}>
                         <button
                           className={asistencias[day]?.[turno] ? 'asistio' : 'falto'}
-                          onClick={() => handleAttendance(day, turno)}
+                          onClick={() => handleAttendance(day, turno, index1+1)}
                         >
                           {asistencias[day]?.[turno] ? (
                             <div>
@@ -223,7 +292,7 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
                                  <span className="material-icons"></span>
                                  
                               </div>
-                              <div className="hora-actual">Llegada: {clickTime}</div>
+                              <div className="hora-actual">Llegada: {currentTime}</div>
                               </div>
                             ) : (
                               <div className="dot-with-dash"></div>
