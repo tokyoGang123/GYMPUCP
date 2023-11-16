@@ -15,6 +15,7 @@ import ListaSesionesCliente from "./components/listaSesionesCliente/ListaSesione
 import Descuentos from "./pages/Descuentos";
 import ListaSuscripcionesPage from "./pages/ListaSuscripcionesPage";
 import PlanEntrenamiento from "./pages/PlanEntrenamiento";
+
 function App() {
   return (
     <Router>

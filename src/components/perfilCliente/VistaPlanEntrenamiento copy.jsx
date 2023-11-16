@@ -84,10 +84,9 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
         idCliente,
         ejercicioPlanes: ejercicioPlanes.map((ejercicioPlan) => ({
           idEjercicio: ejercicioPlan.idEjercicio,
-          series: ejercicioInputs[ejercicioPlan.idEjercicio]?.series || 0,
-          repeticiones:
-            ejercicioInputs[ejercicioPlan.idEjercicio]?.repeticiones || 0,
-          descanso: ejercicioInputs[ejercicioPlan.idEjercicio]?.descanso || 0,
+          series: seriesInput, // Debes obtener este valor del usuario
+          repeticiones: repeticionesInput, // Debes obtener este valor del usuario
+          descanso: descansoInput, // Debes obtener este valor del usuario
         })),
       };
 
@@ -236,46 +235,22 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
                     {/* Inputs al lado de cada checkbox */}
                     <input
                       type="number"
-                      value={ejercicioInputs[ejercicio.id]?.series || 0}
-                      onChange={(e) =>
-                        setEjercicioInputs((prev) => ({
-                          ...prev,
-                          [ejercicio.id]: {
-                            ...prev[ejercicio.id],
-                            series: e.target.value,
-                          },
-                        }))
-                      }
+                      value={seriesInput}
+                      onChange={(e) => setSeriesInput(e.target.value)}
                       placeholder="Series"
                       style={{ marginLeft: "10px", width: "40px" }}
                     />
                     <input
                       type="number"
-                      value={ejercicioInputs[ejercicio.id]?.repeticiones || 0}
-                      onChange={(e) =>
-                        setEjercicioInputs((prev) => ({
-                          ...prev,
-                          [ejercicio.id]: {
-                            ...prev[ejercicio.id],
-                            repeticiones: e.target.value,
-                          },
-                        }))
-                      }
+                      value={repeticionesInput}
+                      onChange={(e) => setRepeticionesInput(e.target.value)}
                       placeholder="Repeticiones"
                       style={{ marginLeft: "10px", width: "80px" }}
                     />
                     <input
                       type="number"
-                      value={ejercicioInputs[ejercicio.id]?.descanso || 0}
-                      onChange={(e) =>
-                        setEjercicioInputs((prev) => ({
-                          ...prev,
-                          [ejercicio.id]: {
-                            ...prev[ejercicio.id],
-                            descanso: e.target.value,
-                          },
-                        }))
-                      }
+                      value={descansoInput}
+                      onChange={(e) => setDescansoInput(e.target.value)}
                       placeholder="Descanso (seg)"
                       style={{ marginLeft: "10px", width: "120px" }}
                     />
