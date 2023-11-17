@@ -9,7 +9,7 @@ import Modal1 from "../modal/Modal";
 import Modal2 from "../modal/Modal";
 import Modal3 from "../modal/ModalB";
 import axios from "axios";
-const urlGetEntrenadores = "https://localhost:7147/entrenadores/listar";
+
 const ListaEntrenadores = ({ elementos }) => {
   // Estado para gestionar los filtros
   const params = useParams();
@@ -41,16 +41,7 @@ const ListaEntrenadores = ({ elementos }) => {
     setElementosFiltrados(elementosFiltrados);
   };
 
-  useEffect(() => {
-    axios
-      .get(urlGetEntrenadores)
-      .then((response) => {
-        setEntrenadoresLeidos(response.data);
-      })
-      .catch((error) => {
-        setError(error);
-      });
-  });
+
 
   // Función para mostrar la lista completa
   const mostrarListaCompleta = () => {
@@ -149,8 +140,8 @@ const ListaEntrenadores = ({ elementos }) => {
 
               <td>
                 {/* Aplica la clase CSS condicionalmente */}
-                <span className={elemento.estado === 1 ? "Inactivo" : "Activo"}>
-                  {elemento.estado === 1 ? "Inactivo" : "Activo"}
+                <span className={elemento.estado !== 2 ? "Inactivo" : "Activo"}>
+                  {elemento.estado !== 2 ? "Inactivo" : "Activo"}
                 </span>
               </td>
 
@@ -173,7 +164,7 @@ const ListaEntrenadores = ({ elementos }) => {
                     openModal3();
                   }}
                 >
-                  Turno
+                  Asistencia
                 </button>
               </td>
             </tr>

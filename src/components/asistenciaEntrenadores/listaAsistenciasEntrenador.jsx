@@ -14,7 +14,6 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
   const diasSemana = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
   const turnos = ['Mañana', 'Tarde', 'Noche'];
   const horarios = ['6:00 - 12:00', '12:00 - 18:00', '18:00 - 23:00'];
-  const [formEnviado, setFormEnviado] = useState(false);
   const sonFechasIguales = (datetime, date) => {
     return datetime.toISOString().split('T')[0] === date.toISOString().split('T')[0];
   };
@@ -61,21 +60,20 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
         
         // Iterate over the obtained asistencias and update the state
         asistenciasObtenidas.forEach(asistencia => {
-          let fechaAsistencia = new Date(asistencia.fechaAsistencia);
-          let dia = fechaAsistencia.getDate();
-          let mes = fechaAsistencia.getMonth();
+          const partes = asistencia.fechaAsistencia.split(/[/ ]+/);
+          const fechaIntercambiada = `${partes[1]}/${partes[0]}/${partes[2]} ${partes[3]}`;
 
-          // Intercambia el día y el mes
-          fechaAsistencia.setDate(mes + 1);  // Agregamos 1 al mes porque los meses en JavaScript van de 0 a 11
-          fechaAsistencia.setMonth(dia - 1); // Restamos 1 al día para evitar conflictos de índices
+          let fechaAsistencia = new Date(fechaIntercambiada);
+
           let hora = fechaAsistencia.getHours();
           let minutos = fechaAsistencia.getMinutes();
           let horaLLegadaString = `${hora}:${minutos}`;
+          
           fechaAsistencia.setHours(19, 0, 0, 0);
-          console.log("fechaDespues", fechaAsistencia);
+
           const diaSemanaAsistencia = diasSemana[fechaAsistencia.getDay() - 1]; // -1 porque los días de la semana empiezan en 0
-          console.log("asistencia.turno:", asistencia.turno)
           const turnoAsistencia = asistencia.turno - 1;
+
           const key = `${fechaAsistencia.toString()}`;
           const key2 = `${turnos[turnoAsistencia]}`
 
@@ -167,27 +165,61 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
 
   const weekDays = generateWeek(new Date(filtroFecha));
   const handleAttendance = (day, turno, n) => {
+    // Verificar si la fecha del día actual es igual a la fecha que se está procesando
+    let currentDate = new Date();
+    const selectedDate = new Date(filtroFecha);
+    const isSameDate = isSameDay(currentDate, selectedDate);
+    let selectedDay = new Date(day);
+    const day1 = currentDate.getDay();
+    const day2 = selectedDay.getDay();
+
+    // Obtener la hora actual
+    const currentHour = currentDate.getHours();
+    const turnoHoras = getTurnoHoras(turno); // Obtener las horas asociadas al turno
+
+    // Si las fechas no son iguales, los días no son iguales o el turno no corresponde a la hora actual, no permitir marcar la asistencia
+    if (!isSameDate || day1 !== day2 || currentHour < turnoHoras[0] || currentHour >= turnoHoras[1] || entrenador.estado ==1 || entrenador.estado == 0 ) {
+        console.log("No se puede marcar la asistencia para esta fecha o turno");
+        return;
+    }
+
+    // Resto de la función para marcar la asistencia...
+  
     new Date(filtroFecha).setHours(19, 0, 0, 0);
     console.log("LLegue...");
     const updatedAsistencias = { ...asistencias };
     if (!updatedAsistencias[day]) {
-      updatedAsistencias[day] = {};
-      console.log("Cambio 1...")
+        updatedAsistencias[day] = {};
+        console.log("Cambio 1...");
     }
     updatedAsistencias[day][turno] = !updatedAsistencias[day][turno];
     console.log("Cambio por click", updatedAsistencias);
     setAsistencias(updatedAsistencias);
     if (!clickTime) {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const formattedTime = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
-      setClickTime(formattedTime); 
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const formattedTime = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+        setClickTime(formattedTime);
     }
     console.log("Entrenador: ", entrenador.id);
     console.log("n: ", n);
     registrarAsistencia(entrenador.id, day, turno, n);
-  };
+};
+  
+  const getTurnoHoras = (turno) => {
+    switch (turno) {
+        case 'Mañana':
+            return [6, 12];
+        case 'Tarde':
+            return [12, 18];
+        case 'Noche':
+            return [18, 23];
+        default:
+            return [0, 0]; // En caso de turno no reconocido
+    }
+};
+  
 
   const fechaNacimientoFormik = convertirFecha(entrenador.fechaNacimiento);
   const fechaIncorporacionFormik = convertirFecha(entrenador.fechaContratacion);
@@ -251,10 +283,7 @@ export default function ListaAsistenciasEntrenador({entrenador}) {
                   type="date"
                   onChange={(e) => setFiltroFecha(e.target.value)}
                 />   
-                <button type="submit">Guardar</button>
-              {formEnviado && (
-              <p className="exito">Asistencias guardadas exitosamente</p>
-              )}
+
             </div>
             <div className="dias">
               <div className="vacio"></div>
