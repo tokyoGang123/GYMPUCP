@@ -1,0 +1,62 @@
+[
+    {
+      "dni": 71204353,
+      "nombre": "Braulio",
+      "apellidoPaterno": "Rojas",
+      "apellidoMaterno": "Ruiz",
+      "sexo": 1,
+      "fechaNacimiento": "25/05/1995",
+      "email": "brojas@gmail.com",
+      "estado": 1,
+      "fechaIncorporacion": "10/07/2023",
+      "turno": "Mañana"
+    },
+    {
+        "dni": 43512345,
+        "nombre": "Andrea",
+        "apellidoPaterno": "Salazar",
+        "apellidoMaterno": "Quevedo",
+        "sexo": 2,
+        "fechaNacimiento": "25/05/1992",
+        "email": "asalazar@gmail.com",
+        "estado": 1,
+        "fechaIncorporacion": "4/01/2023",
+        "turno": "Tarde"
+    },
+    {
+        "dni": 43121023,
+        "nombre": "Renzo",
+        "apellidoPaterno": "Zapata",
+        "apellidoMaterno": "Orihuela",
+        "sexo": 1,
+        "fechaNacimiento": "25/05/1986",
+        "email": "rzapata@gmail.com",
+        "estado": 1,
+        "fechaIncorporacion": "10/05/2022",
+        "turno": "Noche"
+    },
+    {
+        "dni": 18125461,
+        "nombre": "Andres",
+        "apellidoPaterno": "Castillo",
+        "apellidoMaterno": "Sifuentes",
+        "sexo": 1,
+        "fechaNacimiento": "28/07/1998",
+        "email": "acastillo@gmail.com",
+        "estado": 1,
+        "fechaIncorporacion": "10/08/2023",
+        "turno": "Tarde"
+    },
+    {
+        "dni": 71205453,
+        "nombre": "Samantha",
+        "apellidoPaterno": "Polo",
+        "apellidoMaterno": "Lozano",
+        "sexo": 2,
+        "fechaNacimiento": "27/03/1989",
+        "email": "spololozano@gmail.com",
+        "estado": 1,
+        "fechaIncorporacion": "30/04/2023",
+        "turno":"Mañana"
+    }
+  ]

@@ -21,19 +21,20 @@
     border-radius: 12px;
     padding: 0px;
     position: relative;
-    .titulo-modal{
+    background-color: #ffff;
+    .titulo-modal {
       display: flex;
-      background-color: #6750A4;
+      background-color: #6750a4;
       color: white;
       padding: 5px;
       font-size: 1.5rem;
       margin-top: 0%;
-      h3{
+      h3 {
         width: 95%;
         text-align: center;
       }
-      button{
-        background-color: #6750A4;
+      button {
+        background-color: #6750a4;
         color: white;
         border: none;
         font-size: 1.5rem;
@@ -44,7 +45,8 @@
         transition: background-color 0.2s;
         border-radius: 100px;
         &:hover {
-          background-color: #4D3A7C;
+          background-color: #4d3a7c;
+          width: 40px;
         }
       }
     }

@@ -1,0 +1,23 @@
+.unPlanEntrenamiento {
+  display: flex;
+  justify-content: center;
+  .ver-plan-entrenamiento {
+    display: flex;
+    width: 100%;
+    margin: 1rem 0;
+    border: 1px solid transparent;
+    padding: 0.25rem 1rem;
+    //text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px #454343;
+    background-color: #D0BCFF;
+    transition: background-color 300ms;
+    &:hover {
+      background-color: #6750a4;
+      color: #fff;
+    }
+  }
+}

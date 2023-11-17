@@ -1,0 +1,50 @@
+.fila-sesion {
+  display: flex; //para activar orientación
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 10px; /* Agrega espacio entre filas */
+  //background-color: aqua;
+  .cuadro-hora {
+    background-color: #dfd50a;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    width: 10%;
+    border-radius: 45px;
+    text-align: center;
+  }
+  .datos-principales-sesion {
+    background-color: #55b47b;
+    width: 60%;
+    border-radius: 45px;
+    text-align: center;
+  }
+  .cuadro-duracion {
+    background-color: #f7f2fa;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    width: 10%;
+    border-radius: 45px;
+    text-align: center;
+  }
+  .boton-asistencia {
+    background-color: #1e86b3;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    width: 10%;
+    border-radius: 45px;
+    text-align: center;
+  }
+  .boton-inscribir {
+    background-color: #efb8c8;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    width: 10%;
+    border-radius: 45px;
+    text-align: center;
+  }
+}

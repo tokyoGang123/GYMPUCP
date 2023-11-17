@@ -1,0 +1,38 @@
+.tab-container {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-right: 1rem;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.tab-list {
+  display: flex;
+  margin-bottom: 10px;
+  padding: auto;
+}
+
+.tab-list button {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  width: 300px;
+}
+
+.tab-list button.active {
+  border-bottom: 5px solid #6750a4;
+  color: #6750a4;
+}
+
+.tab-list button:hover {
+  color: #6750a4;
+}
+
+.tab-content {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}

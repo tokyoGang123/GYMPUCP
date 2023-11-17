@@ -1,0 +1,35 @@
+/* crearEjercicio.scss */
+
+/* Estilos para el formulario */
+.crear-ejercicio-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 1rem auto;
+
+  /* Estilos para los inputs */
+  input {
+    margin-bottom: 10px;
+    padding: 8px;
+
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  /* Estilos para el botón */
+  button {
+    padding: 10px;
+    background-color: #EADDFF;
+    color: black;
+    font-weight: 100;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+}
+
+/* Estilos específicos para el input de tipo file */
+.crear-ejercicio-form input[type="file"] {
+  margin-bottom: 20px;
+}

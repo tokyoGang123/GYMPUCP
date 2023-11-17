@@ -1,0 +1,101 @@
+.contenido-entrenadores {
+    //background-color: rgb(246, 242, 238);
+    
+    .titulo-entrenador {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente en el eje X */
+
+    }
+    .boton-agregar-entrenador {
+      color: aliceblue;
+      padding: 4px 8px;
+      border-radius: 50px;
+      text-align: right;
+      height: 10vh; /* Ajusta la altura según sea necesario */
+      button {
+        border: none;
+        background-color: #1e86b3;
+        color: aliceblue;
+        cursor: pointer;
+        padding: 8px 8px;
+        margin-right: 4px;
+        border-radius: 50px;
+        text-align: left;
+        background-color: #eaddff;
+        color: #000000;
+      }
+    }
+    .lista-filtros {
+      background-color: aquamarine;
+      padding-left: 15%;
+      padding-right: 15%;
+      display: flex;
+      justify-content: space-between;
+    }
+    // TablaFiltrada.scss
+  
+    .tabla-filtrada {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+
+  
+      th,
+      td {
+        padding: 8px 16px;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      }
+  
+      th {
+        background-color:#b4a4cc;
+        color: white;
+      }
+  
+      tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+  
+      tbody tr:hover {
+        background-color: #e0e0e0;
+      }
+      .activo {
+        font-weight: bold;
+        color: rgb(10, 152, 10);
+      }
+  
+      .inactivo {
+        font-weight: bold;
+        color: rgb(228, 169, 7);
+      }
+      button {
+        border: none;
+        color: aliceblue;
+        cursor: pointer;
+        padding: 4px 8px;
+        margin-right: 4px;
+        border-radius: 50px;
+        &:hover {
+          background-color: #f5f5f5;
+          color: #1e86b3;
+        }
+      }
+  
+      .boton-editar {
+        background-color: #6750a4;
+        a {
+          color: aliceblue;
+          text-decoration: none;
+          &:hover {
+            background-color: #f5f5f5;
+            color: #1e86b3;
+          }
+        }
+      }
+  
+      .boton-turno {
+        background-color: #1e86b3;
+      }
+    }
+  }
+  

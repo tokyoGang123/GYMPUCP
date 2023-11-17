@@ -1,0 +1,168 @@
+.contenido-clientes {
+  padding: 20px 70px;
+  .titulo-cliente {
+    display: flex;
+    justify-content: space-between;
+  }
+  .boton-agregar-cliente {
+    color: aliceblue;
+    padding: 4px 8px;
+    border-radius: 50px;
+    text-align: right;
+    button {
+      border: none;
+      background-color: #1e86b3;
+      color: aliceblue;
+      cursor: pointer;
+      padding: 4px 8px;
+      margin-right: 4px;
+      border-radius: 50px;
+      text-align: left;
+      background-color: #eaddff;
+      color: #000000;
+    }
+  }
+  .boton-agregar-cliente {
+    button {
+      text-align: center;
+      background-color: #7f67be;
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #634f9e;
+      }
+    }
+    margin-bottom: 25px;
+  }
+
+  /*
+    .lista-filtros {
+      background-color: #C1B6CE;
+      padding-left: 15%;
+      padding-right: 15%;
+      display: flex;
+      justify-content: space-between;
+    }
+    */
+  .lista-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 2%;
+    text-align: center;
+    //border: 1px solid black;
+    div {
+      display: flex;
+
+      //      align-items: center;
+      gap: 10px;
+      margin: 4px;
+
+      label {
+        font-weight: bold;
+        //  border: 1px solid black;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      select {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 12px;
+      }
+    }
+    button {
+      background-color: #eaddff;
+      color: black;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 20px;
+      margin-top: auto;
+      margin-bottom: auto;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #7f67be;
+        color: #ffffff;
+      }
+    }
+  }
+
+  // TablaFiltrada.scss
+
+  .tabla-filtrada {
+    background-color: #f0f0f0;
+
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+
+    th,
+    td {
+      padding: 8px 16px;
+      text-align: left;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    th {
+      background-color: #c1b6ce;
+      text-align: center;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    tbody tr:hover {
+      background-color: #e0e0e0;
+    }
+    .activo {
+      font-weight: bold;
+      color: rgb(10, 152, 10);
+    }
+
+    .inactivo {
+      font-weight: bold;
+      color: rgb(228, 169, 7);
+    }
+    button {
+      border: none;
+      width: 60px;
+      color: aliceblue;
+      cursor: pointer;
+      padding: 4px 8px;
+      //margin-right: 2px;
+      margin-left: 8%;
+      margin-right: 8%;
+      border-radius: 50px;
+
+      &:hover {
+        background-color: #f5f5f5;
+        color: #1e86b3;
+      }
+    }
+
+    .boton-perfil {
+      background-color: #6750a4;
+      a {
+        color: aliceblue;
+        text-decoration: none;
+        &:hover {
+          background-color: #f5f5f5;
+          color: #1e86b3;
+        }
+      }
+    }
+
+    .boton-clases {
+      background-color: #1e86b3;
+    }
+  }
+}

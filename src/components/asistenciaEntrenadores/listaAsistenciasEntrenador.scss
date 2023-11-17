@@ -1,0 +1,237 @@
+/* FormularioRegistroCliente.scss */
+
+/* Estilo general para el formulario */
+.formulario-registro {
+    background-color: #ffffff;
+    text-align: center;
+    //height: 800px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  
+    .titulo-formulario {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      margin-top: 0%;
+      color: rgb(255, 255, 255);
+      background-color: #6750A4;
+    }
+    .dias {
+      display: flex;
+      justify-content: space-between;
+      width: 1400px;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin: 0 auto;
+      
+    }
+    .dia{
+      background-color: #EADDFF;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      width: 130px;
+      height: 40px;
+
+    }
+    .current-day{
+      background-color: #8d6fbd;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      width: 130px;
+      height: 40px;
+
+    }
+
+    .tabla-asistencias{
+      width: 100%;
+    }
+  
+    .label1 {
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+      margin-left: 160px;
+    }
+
+    .contenedor-fecha{
+      align-items: left;
+      text-align: left;
+      margin-left: 30px;
+
+    }
+  
+    .label2 {
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+      margin-left: 10px;
+      align-self: left;
+    }
+  
+  
+    .options {
+      width: 200px; /* Ajusta el ancho del campo según tus necesidades */
+     height: 30px; /* Ajusta la altura del campo según tus necesidades */
+      font-size: 16px; /* Ajusta el tamaño de fuente según tus necesidades */
+      background-color: rgb(255, 255, 255); /* Cambia el color de fondo según tus preferencias */
+      border: 1px solid darkgray; /* Cambia el estilo del borde según tus preferencias */
+     color: black; /* Cambia el color del texto según tus preferencias */
+     border-radius: 10px;
+     margin-bottom: 10px;
+    }
+  
+    input[type="date"] {
+      width: 200px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-left: 0;
+      text-align: left;
+    }
+  
+    .campo {
+      width: 400px; /* Ajusta el ancho del campo según tus necesidades */
+     height: 30px; /* Ajusta la altura del campo según tus necesidades */
+      font-size: 16px; /* Ajusta el tamaño de fuente según tus necesidades */
+      background-color: rgb(255, 255, 255); /* Cambia el color de fondo según tus preferencias */
+      border: 1px solid darkgray; /* Cambia el estilo del borde según tus preferencias */
+     color: rgb(0, 0, 0); /* Cambia el color del texto según tus preferencias */
+     border-radius: 10px;
+     margin-bottom: 10px;
+    }
+
+    .fila1{
+      width: 90px;
+      color:#000000;
+      height: 65px;
+      background-color: #EADDFF;
+      margin-top: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      display: flex;
+      border-radius: 10px;
+      margin-left: 20px;
+      
+    }
+
+    .hora-actual{
+      color:#4CAF50;
+      font-size: 11px;
+      
+    }
+
+    .falto{
+      width: 90px;
+      height: 65px;
+      border-radius: 10px;
+      background-color: #f0f0f0;
+      margin-top: 20px;
+      border-color: transparent;
+      margin-right: 40px;
+    }
+
+    .asistio{
+      width: 90px;
+      height: 65px;
+      border-radius: 10px;
+      background-color: #f0f0f0;
+      margin-top: 20px;
+      border-color: transparent;
+      margin-right: 40px;
+    }
+
+    .dot {
+      height: 25px;
+      width: 25px;
+      background-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      border: 3px solid #4CAF50;
+      position: relative;
+    }
+
+    .dot:after {
+      content: '';
+      position: absolute;
+      left: 35%;
+      top: 20%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 12px;
+      border: solid #4CAF50;
+      border-width: 0 2px 2px 0;
+     transform: rotate(45deg);
+    }
+  
+    .dot-with-dash {
+      height: 25px;
+      width: 25px;
+      background-color: transparent;
+      border: 3px solid #999999;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+    }
+
+    .dot-with-dash:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 2px;
+      background-color: #999999;
+    }
+
+    .labelTurno{
+      margin: 0;
+    }
+
+    .labelHorario{
+      font-size: 12px;
+      margin: 0;
+
+    }
+
+    .vacio{
+      width: 50px;
+    }
+    .fecha{
+      margin-top: 10px;
+    }
+  
+    .campo-pequeño {
+      width: 200px; /* Ajusta el ancho del campo según tus necesidades */
+     height: 20px; /* Ajusta la altura del campo según tus necesidades */
+      font-size: 16px; /* Ajusta el tamaño de fuente según tus necesidades */
+      background-color: rgb(255, 255, 255); /* Cambia el color de fondo según tus preferencias */
+      border: 1px solid darkgray; /* Cambia el estilo del borde según tus preferencias */
+     color: black; /* Cambia el color del texto según tus preferencias */
+     border-radius: 10px;
+     margin-bottom: 10px;
+     align-self: left;
+     flex: 1;
+     margin-left: 50px;
+    }
+  
+    .columna {
+      display: flex; /* Utiliza flexbox para organizar los elementos en filas */
+      justify-content: space-between; 
+    }
+  
+
+
+  }
+  

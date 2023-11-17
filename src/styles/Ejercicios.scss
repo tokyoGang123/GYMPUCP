@@ -1,0 +1,123 @@
+// Estilos para el componente de Ejercicios
+
+.contenedor-pagina-ejercicios {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .contenedor-boton-crear-ejercicio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    
+    .boton-crear-ejercicio {
+      color: rgb(0, 0, 0);
+      padding: 4px 8px;
+      border-radius: 50px;
+      text-align: right;
+      background-color: #EADDFF;
+      border: 2px solid #D8D4D4;
+      button {
+        color: #EADDFF;
+        cursor: pointer;
+        padding: 4px 8px;
+        margin-right: 4px;
+        border-radius: 50px;
+        text-align: left;
+        background: #EADDFF;
+        color: #000000;
+      }
+    }
+  }
+  h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .contenedor-menu-ejercicios {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    border: 1px solid #6750a4;
+    flex-direction: space-between;
+    .menu-ejercicios {
+      list-style: none;
+      padding: 0;
+      height: auto;
+
+      li {
+        display: inline-block;
+        margin-right: 10px;
+
+        a {
+          text-decoration: none;
+          color: #333;
+          padding: 8px 12px;
+          border: 1px solid #6750a4;
+          border-radius: 4px;
+          transition: all 0.3s;
+
+          &:hover {
+            background-color: #f0f0f0;
+          }
+
+          &.active {
+            background-color: #6750a4;
+            color: #fff;
+            border: 1px solid #ffff;
+            transition: background-color 0.3s, color 0.3s;
+            //efecto sombra 3d
+            box-shadow: 0px 0px 2px 0px #6750a4;
+            scale: 1.5;
+          }
+        }
+      }
+    }
+  }
+
+  .contenedor-lista-ejercicios {
+    .lista-ejercicios {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      li {
+        margin-bottom: 15px;
+
+        //sombra
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+        gap: 10px;
+        margin-left: 10px;
+        flex-wrap: wrap;
+        min-width: 30%;
+        max-width: 30%;
+        a {
+          display: flex;
+          flex-direction: column;
+          text-decoration: none;
+          color: #333;
+          font-size: large;
+          padding: 8px 12px;
+          align-items: center;
+          img {
+            display: flex;
+            flex-direction: row;
+            margin: 10px 20p;
+            border-radius: 5px;
+          }
+          //efecto hover impresioante
+          transition: all 0.3s;
+          &:hover {
+            background-color: #eaddff;
+          }
+        }
+      }
+    }
+  }
+}

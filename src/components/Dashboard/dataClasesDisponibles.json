@@ -1,0 +1,47 @@
+[
+  {
+    "id": 2,
+    "nombre": "Smart Bike",
+    "fecha": "16/09/2019",
+    "hora": "10:00",
+    "duracion": "60",
+    "capacidad": "20",
+    "instructor": "Juan Perez"
+  },
+  {
+    "id": 3,
+    "nombre": "Yoga Matutino",
+    "fecha": "17/09/2019",
+    "hora": "08:30",
+    "duracion": "45",
+    "capacidad": "15",
+    "instructor": "Maria Rodriguez"
+  },
+  {
+    "id": 4,
+    "nombre": "Entrenamiento Funcional",
+    "fecha": "18/09/2019",
+    "hora": "11:15",
+    "duracion": "60",
+    "capacidad": "25",
+    "instructor": "Carlos Gomez"
+  },
+  {
+    "id": 5,
+    "nombre": "Pilates en Pareja",
+    "fecha": "19/09/2019",
+    "hora": "19:00",
+    "duracion": "75",
+    "capacidad": "10",
+    "instructor": "Ana Martinez"
+  },
+  {
+    "id": 6,
+    "nombre": "Running Club",
+    "fecha": "20/09/2019",
+    "hora": "18:30",
+    "duracion": "90",
+    "capacidad": "30",
+    "instructor": "Pedro Sanchez"
+  }
+]
