@@ -1,7 +1,7 @@
 import { Card, DonutChart, Title } from "@tremor/react";
 import React, { useState } from "react";
 
-export default function ChartDonut() {
+export default function ChartDonut({ suscripciones }) {
   const [value, setValue] = useState(null);
   const dataSuscripciones = [
     { nombre: "VIP", cantidad: 20, color: "#FF0000" },
@@ -20,24 +20,24 @@ export default function ChartDonut() {
         }}
       >
         <span className="text-1xl font-bold">Total:{158}</span>
-        {dataSuscripciones.map((suscripcion) => (
+        {suscripciones.map((suscripcion, index) => (
           <div
             className="flex flex-row items-center mb-4"
-            key={suscripcion.nombre}
+            key={suscripcion.idTipoSuscripcion}
           >
             <div
               className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: suscripcion.color }}
+              style={{ backgroundColor: dataSuscripciones.color }}
             ></div>
-            <div className="ml-2">{suscripcion.nombre}</div>
+            <div className="ml-2">{suscripcion.tipoSuscripcion}</div>
           </div>
         ))}
       </div>
       <div className="flex flex-col items-center justify-center flex-1">
         <DonutChart
-          data={dataSuscripciones}
+          data={suscripciones}
           category="cantidad"
-          index="nombre"
+          index="tipoSuscripcion"
           colors={[
             "green",
             "yellow",

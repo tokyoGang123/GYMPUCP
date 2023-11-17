@@ -1,23 +1,34 @@
 .contenedor-lista-planes-entrenamiento {
-  //background: aqua;
+  .subtitulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  background: #f3f2ee;
   display: flex;
   flex-direction: column;
   //justify-content: center;
   //align-items: center;
-  width: 100%;
+  padding: 1rem 1rem;
+  width: 50%;
   .boton-crear-plan-entrenamiento {
-    width: 100%;
     display: flex;
-    width: 100%;
+    width: 50%;
     border: 1px solid transparent;
     text-transform: uppercase;
-    display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     border-radius: 2px;
     box-shadow: 0 2px 4px #686666;
     background-color: #d0bcff;
     transition: background-color 300ms;
+    display: flex;
+    width: 100%;
+    margin: 1rem 0;
+    border: 1px solid transparent;
+    padding: 0.25rem 1rem;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px #454343;
     &:hover {
       background-color: #6750a4;
       color: #fff;

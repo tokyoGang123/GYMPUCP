@@ -16,6 +16,24 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
   const [repeticionesInput, setRepeticionesInput] = useState(0);
   const [descansoInput, setDescansoInput] = useState(0);
   const [ejercicioInputs, setEjercicioInputs] = useState({});
+  const [clientesLeidos, setClientesLeidos] = useState([]);
+  console.log("adadasdasdasda", nombre);
+  const urlGetClientes = "https://localhost:7147/clientes/listar";
+  useEffect(() => {
+    axios
+      .get(urlGetClientes)
+      .then((response) => {
+        setClientesLeidos(response.data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, []);
+  console.log("tengooooooooo", clientesLeidos);
+  const clienteEncontradoActual = clientesLeidos.find(
+    (item) => item.id == idCliente
+  );
+  /* */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -84,15 +102,20 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
         idCliente,
         ejercicioPlanes: ejercicioPlanes.map((ejercicioPlan) => ({
           idEjercicio: ejercicioPlan.idEjercicio,
-          series: ejercicioInputs[ejercicioPlan.idEjercicio]?.series || 0,
+          series: parseInt(
+            ejercicioInputs[ejercicioPlan.idEjercicio]?.series || 0
+          ),
           repeticiones:
-            ejercicioInputs[ejercicioPlan.idEjercicio]?.repeticiones || 0,
-          descanso: ejercicioInputs[ejercicioPlan.idEjercicio]?.descanso || 0,
+            parseInt(
+              ejercicioInputs[ejercicioPlan.idEjercicio]?.repeticiones
+            ) || 0,
+          descanso:
+            parseFloat(ejercicioInputs[ejercicioPlan.idEjercicio]?.descanso) ||
+            0,
         })),
       };
 
       // Realizar la solicitud para crear el nuevo plan
-      /*
       const response = await axios.post(
         "https://localhost:7147/planesentrenamiento/crear",
         nuevoPlan
@@ -104,98 +127,162 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
       console.log(
         "Al crear el nuevo plan, planesEntrenamiento:",
         response.data
-        );
-        */
+      );
+
       alert("Nuevo plan creado:", nuevoPlan);
       console.log("first alert", nuevoPlan);
       setNuevoPlanNombre("");
       setEjercicioPlanes([]);
     } catch (error) {
-      console.error("Error al crear el nuevo plan:", error);
+      if (error.response) {
+        if (error.response.status === 400) {
+          // Manejar el caso específico de ya haber un plan activo
+          alert("Ya hay un plan activo para este cliente.");
+        } else {
+          // Manejar otros errores de respuesta del servidor
+          alert("Error del servidor: " + error.response.data);
+        }
+      } else {
+        // Manejar errores de red o cualquier otro tipo de error
+        console.error("Error al crear el nuevo plan:", error.message);
+      }
     }
   };
-
+  if (!clienteEncontradoActual) {
+    // Mientras clienteEncontradoActual no tenga valor, puedes mostrar un mensaje de carga
+    return <p>Cargando...</p>;
+  }
   // Si el ID es 0, mostrar la interfaz para crear un nuevo plan
   if (id === 0) {
     return (
       <div className="contenedor-vista-plan-entrenamiento">
-        <h2>Detalles del Plan de Entrenamiento</h2>
+        <h2 className="titulo-1">Detalles del Plan de Entrenamiento</h2>
         <div className="contenedor-vista-plan-entrenamiento-general">
           <div className="contenedor-vista-plan-entrenamiento-ejercicios">
-            <p style={{ marginBottom: "10px", fontSize: "16px" }}>
-              ID del Cliente: {idCliente}
-            </p>
-            <label style={{ display: "block", marginBottom: "10px" }}>
-              Nombre del Nuevo Plan:
-              <input
-                type="text"
-                value={nuevoPlanNombre}
-                onChange={(e) => setNuevoPlanNombre(e.target.value)}
+            <div className="datos-cliente-plan">
+              <p className="nombre-cliente">
+                Cliente:{" "}
+                <span className="borde-suave">
+                  {clienteEncontradoActual.nombre}{" "}
+                  {clienteEncontradoActual.apellidoPaterno}{" "}
+                  {clienteEncontradoActual.apellidoMaterno}
+                </span>
+              </p>
+              <label
                 style={{
-                  padding: "8px",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  fontSize: "16px",
-                  marginLeft: "0px",
-                  width: "70%",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  color: "rgb(0, 0, 0)",
+                  marginTop: "2px",
+                  textAlign: "left",
                 }}
-              />
-            </label>
-            <label>
-              Peso inicial:
-              <input
-                type="text"
-                value={pesoInicial}
-                onChange={(e) => setPesoInicial(e.target.value)}
+              >
+                Nombre del Nuevo Plan:<br></br>
+                <input
+                  type="text"
+                  value={nuevoPlanNombre}
+                  onChange={(e) => setNuevoPlanNombre(e.target.value)}
+                  style={{
+                    border: "1px solid #766e6e",
+                    padding: "0.2rem 1rem",
+                    borderRadius: "8px",
+                    backgroundColor: "white",
+                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                    width: "400px",
+                  }}
+                />
+              </label>
+              <label
                 style={{
-                  padding: "8px",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  fontSize: "16px",
-                  marginLeft: "0px",
-                  width: "70%",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  color: "rgb(0, 0, 0)",
+                  marginTop: "2px",
+                  textAlign: "left",
                 }}
-              />
-            </label>
-            <label>
-              Fecha Inicio:
-              <input
-                type="date"
-                value={fechaInicio}
-                onChange={(e) => setFechaInicio(e.target.value)}
+              >
+                Peso inicial:<br></br>
+                <input
+                  type="text"
+                  value={pesoInicial}
+                  onChange={(e) => setPesoInicial(e.target.value)}
+                  style={{
+                    border: "1px solid #766e6e",
+                    padding: "0.2rem 1rem",
+                    borderRadius: "8px",
+                    backgroundColor: "white",
+                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                    width: "100px",
+                  }}
+                />
+                Kg
+              </label>
+              <label
                 style={{
-                  padding: "8px",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  fontSize: "16px",
-                  marginLeft: "0px",
-                  width: "70%",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  color: "rgb(0, 0, 0)",
+                  marginTop: "2px",
+                  textAlign: "left",
                 }}
-              />
-            </label>
-            <label>
-              Fecha Fin:
-              <input
-                type="date"
-                value={fechaFin}
-                onChange={(e) => setFechaFin(e.target.value)}
+              >
+                Fecha Inicio:<br></br>
+                <input
+                  type="date"
+                  value={fechaInicio}
+                  onChange={(e) => setFechaInicio(e.target.value)}
+                  style={{
+                    border: "1px solid #766e6e",
+                    padding: "0.2rem 1rem",
+                    borderRadius: "8px",
+                    backgroundColor: "white",
+                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label
                 style={{
-                  padding: "8px",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  fontSize: "16px",
-                  marginLeft: "0px",
-                  width: "70%",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  color: "rgb(0, 0, 0)",
+                  marginTop: "2px",
+                  textAlign: "left",
                 }}
-              />
-            </label>
-            <h3 style={{ marginBottom: "10px" }}>Selecciona Ejercicios:</h3>
-            <ul style={{ listStyleType: "none", padding: "0" }}>
+              >
+                Fecha Fin:<br></br>
+                <input
+                  type="date"
+                  value={fechaFin}
+                  onChange={(e) => setFechaFin(e.target.value)}
+                  style={{
+                    border: "1px solid #766e6e",
+                    padding: "0.2rem 1rem",
+                    borderRadius: "8px",
+                    backgroundColor: "white",
+                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+            </div>
+            <h2
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: "rgb(0, 0, 0)",
+              }}
+            >
+              Selecciona Ejercicios:
+            </h2>
+            <ul
+              className="form-container"
+              style={{ listStyleType: "none", padding: "1rem" }}
+            >
               {ejercicios.map((ejercicio) => (
-                <li key={ejercicio.id} style={{ marginBottom: "5px" }}>
-                  <label style={{ display: "flex", alignItems: "center" }}>
+                <li key={ejercicio.id} className="form-item">
+                  <label className="form-label">
                     <input
                       type="checkbox"
+                      className="checkbox-input"
                       checked={ejercicioPlanes.some(
                         (ejercicioPlan) =>
                           ejercicioPlan.idEjercicio === ejercicio.id
@@ -215,28 +302,19 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
                               ]
                         );
                       }}
-                      style={{
-                        marginRight: "5px",
-                        appearance: "none",
-                        width: "20px",
-                        height: "20px",
-                        borderRadius: "5px",
-                        border: "2px solid #3498db",
-                        backgroundColor: ejercicioPlanes.some(
-                          (p) => p.idEjercicio === ejercicio.id
-                        )
-                          ? "rgb(174, 129, 247)"
-                          : "transparent",
-                        cursor: "pointer",
-                        outline: "none",
-                        transition: "background-color 0.3s ease",
-                      }}
                     />
-                    {ejercicio.nombre}
+
                     {/* Inputs al lado de cada checkbox */}
                     <input
+                      type="text"
+                      value={ejercicio.nombre}
+                      className="numeric-input-name"
+                      readOnly
+                    />
+
+                    <input
                       type="number"
-                      value={ejercicioInputs[ejercicio.id]?.series || 0}
+                      value={ejercicioInputs[ejercicio.id]?.series || "Series"}
                       onChange={(e) =>
                         setEjercicioInputs((prev) => ({
                           ...prev,
@@ -247,11 +325,15 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
                         }))
                       }
                       placeholder="Series"
-                      style={{ marginLeft: "10px", width: "40px" }}
+                      className="numeric-input"
                     />
+
                     <input
                       type="number"
-                      value={ejercicioInputs[ejercicio.id]?.repeticiones || 0}
+                      value={
+                        ejercicioInputs[ejercicio.id]?.repeticiones ||
+                        "Repeticiones"
+                      }
                       onChange={(e) =>
                         setEjercicioInputs((prev) => ({
                           ...prev,
@@ -262,11 +344,13 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
                         }))
                       }
                       placeholder="Repeticiones"
-                      style={{ marginLeft: "10px", width: "80px" }}
+                      className="numeric-input"
                     />
                     <input
                       type="number"
-                      value={ejercicioInputs[ejercicio.id]?.descanso || 0}
+                      value={
+                        ejercicioInputs[ejercicio.id]?.descanso || "Descanso"
+                      }
                       onChange={(e) =>
                         setEjercicioInputs((prev) => ({
                           ...prev,
@@ -277,12 +361,13 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
                         }))
                       }
                       placeholder="Descanso (seg)"
-                      style={{ marginLeft: "10px", width: "120px" }}
+                      className="numeric-input"
                     />
                   </label>
                 </li>
               ))}
             </ul>
+
             <button
               onClick={handleCrearNuevoPlan}
               style={{
@@ -322,20 +407,23 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
   // Si el ID no es 0, mostrar los detalles del plan existente
   return (
     <div className="contenedor-vista-plan-entrenamiento">
-      <h2>Detalles del Plan de Entrenamiento</h2>
+      <h2 className="titulo-1">Detalles del Plan de Entrenamiento</h2>
       <div className="contenedor-vista-plan-entrenamiento-general">
         <div className="contenedor-vista-plan-entrenamiento-ejercicios">
-          <p>
-            <h3>Nombre del plan: {nombre}</h3>
-          </p>
-          <p>ID del Plan: {id}</p>
-          <p>ID del Cliente: {idCliente}</p>
-          <h3
-            style={{ fontSize: "24px", color: "black", marginBottom: "10px" }}
-          >
-            Ejercicios:
-          </h3>
-          <ul style={{ listStyleType: "none", padding: "0" }}>
+          <div className="datos-cliente-plan">
+            <p className="nombre-cliente">
+              Cliente:{" "}
+              <span className="borde-suave">
+                {clienteEncontradoActual.nombre}{" "}
+                {clienteEncontradoActual.apellidoPaterno}{" "}
+                {clienteEncontradoActual.apellidoMaterno}
+              </span>
+            </p>
+            <p className="nombre-plan">
+              Nombre del plan: <span className="borde-suave">{nombre}</span>
+            </p>
+          </div>
+          <ul className="un-contenedor-lista-ejercicios">
             {ejercicioPlanes.map((ejercicio, index) => {
               const ejercicioEncontrado = ejercicios.find(
                 (e) => e.id === ejercicio.idEjercicio
@@ -345,33 +433,24 @@ export default function VistaPlanEntrenamiento({ id, idCliente, nombre }) {
                 <li
                   key={index}
                   style={{
-                    border: "1px solid #ddd",
-                    borderRadius: "5px",
                     padding: "15px",
                     marginBottom: "15px",
                     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                   }}
                 >
-                  <p
-                    style={{
-                      fontSize: "18px",
-                      fontWeight: "bold",
-                      margin: "0 0 10px",
-                    }}
-                  ></p>
                   {ejercicioEncontrado && (
                     <>
-                      <h4 style={{ margin: "0 0 5px" }}>
-                        Nombre: {ejercicioEncontrado.nombre}
-                      </h4>
-                      <p style={{ margin: "0 0 5px" }}>
-                        Series: {ejercicioEncontrado.series}
+                      <p style={{ width: "25%", margin: "0 0 5px" }}>
+                        <b> {ejercicioEncontrado.nombre}</b>
                       </p>
-                      <p style={{ margin: "0 0 5px" }}>
-                        Repeticiones: {ejercicioEncontrado.repeticiones}
+                      <p style={{ width: "25%", margin: "0 0 5px" }}>
+                        <b>{ejercicio.series} </b> series
                       </p>
-                      <p style={{ margin: "0 0 5px" }}>
-                        Descanso: {ejercicioEncontrado.descanso}
+                      <p style={{ width: "25%", margin: "0 0 5px" }}>
+                        <b>{ejercicio.repeticiones}</b> repeticiones
+                      </p>
+                      <p style={{ width: "25%", margin: "0 0 5px" }}>
+                        Descanso: <b>{ejercicio.descanso}</b> seg
                       </p>
                     </>
                   )}

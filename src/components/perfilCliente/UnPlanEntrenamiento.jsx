@@ -17,8 +17,8 @@ export default function UnPlanEntrenamiento({ idCliente, plan }) {
   };
   return (
     <div className="unPlanEntrenamiento" onClick={handleVerClick}>
-      <button className="ver-plan-entrenamiento" onl>
-        <h3>{nombre}</h3> <h3>ver</h3>
+      <button className="ver-plan-entrenamiento" >
+        <h4>{nombre}</h4> <h3>Ver</h3>
       </button>
       <div></div>
     </div>

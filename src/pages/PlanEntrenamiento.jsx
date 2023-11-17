@@ -10,7 +10,16 @@ export default function PlanEntrenamiento() {
   // Usa el ID en la lógica para cargar los detalles del plan con ese ID
 
   return (
-    <div>
+    <div
+      className="contenedor-plan-entrenamiento"
+      style={{
+        //border: "5px solid blue",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
       <VistaPlanEntrenamiento id={id} idCliente={idCliente} nombre={nombre} />
     </div>
   );
