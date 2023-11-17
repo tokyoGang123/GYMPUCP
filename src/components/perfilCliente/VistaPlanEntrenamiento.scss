@@ -2,23 +2,130 @@
 
 // Contenedor principal
 .contenedor-vista-plan-entrenamiento {
+  .titulo-1 {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+  }
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
   font-family: "Arial", sans-serif;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  //border: 1px solid #f31818;
-  background-color: #f8f8f8;
+  //max-width: 100%;
+  margin: 1rem 1rem;
+  //padding: 20px;
+  border: 1px solid #736a6a;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  width: 90%;
   .contenedor-vista-plan-entrenamiento-general {
     display: flex;
-    //border: 2px solid blue;
+
+    padding: 1rem;
     .contenedor-vista-plan-entrenamiento-ejercicios {
       //border: 1px solid #f31818;
-      width: 50%;
+      padding: 0.5rem;
+      width: 100%;
+      padding-left: 1rem;
+      .datos-cliente-plan {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: start;
+        .nombre-cliente {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: rgb(0, 0, 0);
+          .borde-suave {
+            border: 1px solid #766e6e;
+            padding: 0.2rem 1rem;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+        }
+        .nombre-plan {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: rgb(0, 0, 0);
+          margin-top: 0.5rem;
+          .borde-suave {
+            border: 1px solid #766e6e;
+            padding: 0.2rem 1rem;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+      .un-contenedor-lista-ejercicios {
+        background-color: #f3f2ee;
+        padding: 1rem;
+        li {
+          display: flex;
+          background-color: #f6ddff;
+          justify-content: space-between;
+          align-items: center;
+          border-radius: 8px;
+          border: 1px solid #ddd;
+        }
+      }
     }
   }
 }
 // Estilos adicionales según tus preferencias
+/* Estilos generales */
+// Estilos generales
+.form-container {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+}
+
+// Estilos para cada ítem del formulario
+.form-item {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.form-label {
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: rgb(0, 0, 0);
+}
+// Estilos para los checkboxes
+.checkbox-input {
+  margin-right: 5px;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #6634db;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+
+  &:checked {
+    background-color: rgb(174, 129, 247);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%236634db" viewBox="0 0 24 24" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+// Estilos para los inputs numéricos
+.numeric-input {
+  border: 1px solid #766e6e;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 1rem;
+  margin-right: 10px;
+  width: 15%;
+  text-align: center;
+}

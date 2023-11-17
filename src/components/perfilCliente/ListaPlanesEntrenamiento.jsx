@@ -35,7 +35,8 @@ export default function ListaPlanesEntrenamiento({ idCliente }) {
     // Tu componente React aquí
     // lA estructura del dato recibido es:
     <div className="contenedor-lista-planes-entrenamiento">
-      <h3>Planes de entrenamiento</h3>
+      <h4 className="subtitulo">Mis planes de entrenamiento</h4>
+      ---------------------------------------------------------
       <ul>
         {planesEntrenamiento.map((plan) => (
           // Pasar el prop idCliente y plan al componente UnPlanEntrenamiento
@@ -51,7 +52,9 @@ export default function ListaPlanesEntrenamiento({ idCliente }) {
           className="boton-crear-plan-entrenamiento"
           onClick={handleVerClick}
         >
-          <h3>Crear nuevo plan</h3>
+          <h3>
+            <b>Crear nuevo plan</b>
+          </h3>
         </button>
       </ul>
     </div>
