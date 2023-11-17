@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import elementos from "./dataEntrenadores.json"; // Importa los datos desde el archivo JSON
 import ListaEntrenadores from "../components/listaEntrenadores/ListaEntrenadores";
-const urlGetEntrenadores = "https://localhost:7147/entrenadores/listar";
+const urlGetEntrenadores = "https://localhost:7147/entrenadores/listar-todos";
 export default function Entrenadores() {
   const [entrenadores, setEntrenadores] = useState([]);
   const [error, setError] = useState(null);
