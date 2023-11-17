@@ -4,6 +4,7 @@ import "../styles/Ejercicios.scss";
 import Modal from "../components/modal/Modal";
 import CrearEjercicio from "../components/formularioEjercicios/CrearEjercicio";
 import axios from "axios";
+import ImageViewer from "./ImageViewer";
 
 export default function Ejercicios() {
   const [tipoEjercicioSeleccionado, setTipoEjercicioSeleccionado] =
@@ -28,10 +29,10 @@ export default function Ejercicios() {
       });
   }, []); // El se
   const tiposEjerciciosLocal = [
-    { idTipoEjercicio: 1, nombre: "Piernas" },
-    { idTipoEjercicio: 2, nombre: "Espalda" },
-    { idTipoEjercicio: 3, nombre: "Bíceps" },
-    { idTipoEjercicio: 4, nombre: "Tríceps" },
+    { idTipoEjercicio: 2, nombre: "Piernas" },
+    { idTipoEjercicio: 3, nombre: "Espalda" },
+    { idTipoEjercicio: 4, nombre: "Bíceps" },
+    { idTipoEjercicio: 5, nombre: "Tríceps" },
   ];
 
   const filtrarEjercicios = (idTipoEjercicio) => {
@@ -60,6 +61,7 @@ export default function Ejercicios() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+  if (datos === null) return <div>Cargando...</div>;
   return (
     <div className="contenedor-pagina-ejercicios">
       <h3> Gestionar ejercicios</h3>
@@ -86,7 +88,7 @@ export default function Ejercicios() {
       </div>
       <div className="contenedor-menu-ejercicios">
         <ul className="menu-ejercicios">
-          {tiposEjerciciosLocal.map((tipoEjercicio) => (
+          {/*tiposEjerciciosLocal.map((tipoEjercicio) => (
             <li key={tipoEjercicio.idTipoEjercicio}>
               <a
                 onClick={() => filtrarEjercicios(tipoEjercicio.idTipoEjercicio)}
@@ -99,13 +101,25 @@ export default function Ejercicios() {
                 {tipoEjercicio.nombre}
               </a>
             </li>
-          ))}
+              ))*/}
         </ul>
       </div>
 
       <div className="contenedor-lista-ejercicios">
         <ul className="lista-ejercicios">
-          {ejerciciosFiltrados.map((ejercicio) => (
+          {datos.map((ejercicio) => (
+            <li key={ejercicio.id}>
+              <a href="#">
+                {ejercicio.nombre}
+                <img
+                  src={`data:image/jpg;base64,${ejercicio.archivo}`}
+                  alt={"Imagen del ejercicio"}
+                  style={{ maxWidth: "100%" }}
+                />
+              </a>
+            </li>
+          ))}
+          {/*ejerciciosFiltrados.map((ejercicio) => (
             <li key={ejercicio.Id}>
               <a href="#">
                 {ejercicio.Nombre}
@@ -116,7 +130,7 @@ export default function Ejercicios() {
                 />
               </a>
             </li>
-          ))}
+          ))*/}
         </ul>
       </div>
       <div>

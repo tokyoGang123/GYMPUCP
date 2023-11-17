@@ -11,10 +11,10 @@ const CrearEjercicio = () => {
     archivo: null,
   });
   const tiposEjerciciosLocal = [
-    { idTipoEjercicio: 1, nombre: "Piernas" },
-    { idTipoEjercicio: 2, nombre: "Espalda" },
-    { idTipoEjercicio: 3, nombre: "Bíceps" },
-    { idTipoEjercicio: 4, nombre: "Tríceps" },
+    { idTipoEjercicio: 2, nombre: "Piernas" },
+    { idTipoEjercicio: 3, nombre: "Espalda" },
+    { idTipoEjercicio: 4, nombre: "Bíceps" },
+    { idTipoEjercicio: 5, nombre: "Tríceps" },
   ];
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -47,15 +47,16 @@ const CrearEjercicio = () => {
 
       // Manejo de la respuesta del servidor si es necesario
       console.log("Respuesta del servidor:", response);
+      alert("Ejercicio creado correctamente");
     } catch (error) {
       console.error("Hubo un error al enviar la solicitud:", error);
+      alert("Error al crear el ejercicio");
     }
   };
 
   return (
     <form className="crear-ejercicio-form" onSubmit={handleSubmit}>
-     
-     {/* <label>Crear Nuevo Ejercicio</label>
+      {/* <label>Crear Nuevo Ejercicio</label>
       <input
         type="text"
         name="id"
@@ -158,14 +159,19 @@ const CrearEjercicio = () => {
         }}
       />
       <label>Imagen:</label>
-      <input type="file" name="archivo" onChange={handleFileChange} style={{
-            padding: "8px",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-            fontSize: "16px",
-            marginLeft: "10px",
-            width: "100%",
-          }}/>
+      <input
+        type="file"
+        name="archivo"
+        onChange={handleFileChange}
+        style={{
+          padding: "8px",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+          fontSize: "16px",
+          marginLeft: "10px",
+          width: "100%",
+        }}
+      />
       <button type="submit">Enviar</button>
     </form>
   );

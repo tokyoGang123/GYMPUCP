@@ -69,32 +69,41 @@ export default function DashboardBase() {
                   className="text-2xl font-bold"
                   style={{
                     display: "flex",
-                    minWidth: "580px",
+                    minWidth: "780px",
                     // alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
                   {"Clases Disponibles"}
                 </span>
-                <span className="text-2xl font-bold " style={{}}>
+                <span className="text-2xl font-bold flex">
                   <form onSubmit={handleSubmit} style={{ display: "flex" }}>
-                    <div>
-                      <label>Fecha de Inicio:</label>
+                    <div className="mb-4">
+                      <label className=" text-gray-700">Fecha de Inicio:</label>
                       <input
                         type="date"
                         value={fechaInicio}
                         onChange={(e) => setFechaInicio(e.target.value)}
+                        className="mt-1 p-2 border rounded-md w-full"
                       />
                     </div>
-                    <div>
-                      <label>Fecha de Fin:</label>
+                    <div className="mb-4 ml-4">
+                      <label className="block text-gray-700">
+                        Fecha de Fin:
+                      </label>
                       <input
                         type="date"
                         value={fechaFin}
                         onChange={(e) => setFechaFin(e.target.value)}
+                        className="mt-1 p-2 border rounded-md w-full"
                       />
                     </div>
-                    <button type="submit">Consultar Suscripciones</button>
+                    <button
+                      type="submit"
+                      className="bg-purple-500 text-white px-2 py-1 rounded-md hover:bg-purple-600 ml-2"
+                    >
+                      Consultar Suscripciones
+                    </button>
                   </form>
                 </span>
               </div>
