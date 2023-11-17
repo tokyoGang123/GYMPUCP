@@ -45,7 +45,7 @@ export default function DashboardBase() {
     return `${day}%2F${month}%2F${year}`;
   };
   return (
-    <div className="contenedor-principal-inicio">
+    <div className="contenedor-principal-inicioo">
       <TabGroup className="mt-2">
         <TabList>
           <Tab>
